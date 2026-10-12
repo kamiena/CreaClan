@@ -1,0 +1,33 @@
+/* サイト全体で使うアイコン（<svg class="icon"><use href="#i-名前"></use></svg> で表示） */
+(function () {
+  var sprite =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">' +
+    '<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>' +
+    '<symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>' +
+    '<symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>' +
+    '<symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>' +
+    '<symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>' +
+    '<symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V5M5.5 11.5 12 5l6.5 6.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>' +
+    '<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3.2-3.2a4.5 4.5 0 0 0-6.4-6.4L11.6 6M14 10a4.5 4.5 0 0 0-6.4 0l-3.2 3.2a4.5 4.5 0 0 0 6.4 6.4l1.6-1.6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>' +
+    '<symbol id="i-x" viewBox="0 0 24 24"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z"/></symbol>' +
+    '<symbol id="i-yt" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></symbol>' +
+    '<symbol id="i-spotify" viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22Zm5.04 15.87a.69.69 0 0 1-.94.23c-2.58-1.58-5.83-1.93-9.66-1.06a.69.69 0 1 1-.3-1.34c4.19-.96 7.78-.55 10.67 1.22.32.2.43.62.23.95Zm1.35-3a.86.86 0 0 1-1.18.28c-2.95-1.81-7.45-2.34-10.94-1.28a.86.86 0 0 1-.5-1.65c3.99-1.21 8.95-.62 12.34 1.46.4.25.53.78.28 1.19Zm.12-3.12C14.97 8.65 9.1 8.46 5.71 9.49a1.03 1.03 0 1 1-.6-1.97c3.9-1.18 10.37-.95 14.45 1.47a1.03 1.03 0 0 1-1.05 1.77Z"/></symbol>' +
+    '<symbol id="i-steam" viewBox="0 0 24 24"><path d="M12 1.5a10.5 10.5 0 0 0-10.46 9.66l5.62 2.32a2.95 2.95 0 0 1 1.68-.52h.17l2.5-3.62v-.05a3.96 3.96 0 1 1 3.96 3.96h-.09l-3.57 2.54v.14a2.97 2.97 0 0 1-5.88.59l-4.02-1.66A10.5 10.5 0 1 0 12 1.5Zm-4.46 15.93-1.29-.53a2.24 2.24 0 1 0 1.22-3.06l1.33.55a1.65 1.65 0 1 1-1.26 3.04Zm10.01-8.14a2.64 2.64 0 1 0-5.27 0 2.64 2.64 0 0 0 5.27 0Zm-4.62 0a1.98 1.98 0 1 1 3.97 0 1.98 1.98 0 0 1-3.97 0Z"/></symbol>' +
+    '<symbol id="i-bag" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8 7V6a4 4 0 0 1 8 0v1h3.5l1 15h-17l1-15H8Zm2 0h4V6a2 2 0 0 0-4 0v1Z"/></symbol>' +
+    '<symbol id="i-mail" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2.5 4.5h19A1.5 1.5 0 0 1 23 6v12a1.5 1.5 0 0 1-1.5 1.5h-19A1.5 1.5 0 0 1 1 18V6a1.5 1.5 0 0 1 1.5-1.5Zm1.6 2.6V17h15.8V7.1l-7.9 5.7-7.9-5.7Zm1.7-.6 6.2 4.5 6.2-4.5H5.8Z"/></symbol>' +
+    '<symbol id="i-home" viewBox="0 0 24 24"><path d="M12 2.8 1.8 11.4l1.6 1.9 1.6-1.3V21h5.5v-6h3v6H19v-9l1.6 1.3 1.6-1.9L12 2.8Z"/></symbol>' +
+    '<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>' +
+    '<symbol id="i-pad" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7 6.5h10a5 5 0 0 1 5 5V14a3.5 3.5 0 0 1-6.3 2.1l-1.2-1.6h-5l-1.2 1.6A3.5 3.5 0 0 1 2 14v-2.5a5 5 0 0 1 5-5Zm-.2 3.2v1.5H5.3v1.6h1.5v1.5h1.6v-1.5h1.5v-1.6H8.4V9.7H6.8Zm9.9.1a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Zm-2 2.1a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/></symbol>' +
+    '<symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2.5a3.5 3.5 0 0 0-3.5 3.5v6a3.5 3.5 0 0 0 7 0V6A3.5 3.5 0 0 0 12 2.5Z"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3.5M8.5 21.5h7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>' +
+    '<symbol id="i-news" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4 3.5h13A1.5 1.5 0 0 1 18.5 5v2.5H21A1.5 1.5 0 0 1 22.5 9v9.5a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3V5A1.5 1.5 0 0 1 4 3.5Zm1 3V12h6.5V6.5H5Zm8.5 0v2h3v-2h-3Zm0 3.5v2h3v-2h-3ZM5 14v2h11.5v-2H5Zm13.5-4v8.5a1 1 0 0 0 2 0V10h-2ZM5 17.5v.01h11.5v-.01H5Z"/></symbol>' +
+    '<symbol id="i-video" viewBox="0 0 24 24"><path d="M3.5 5.5h11a2 2 0 0 1 2 2v1.6l4.3-2.6a.8.8 0 0 1 1.2.7v9.6a.8.8 0 0 1-1.2.7l-4.3-2.6v1.6a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2Z"/></symbol>' +
+    '<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 2.5a1.5 1.5 0 0 1 1.5 1.5v.3c3.6-1.6 6.4 1.4 10.5 0 .7-.2 1.5.3 1.5 1v8.4c0 .5-.3.9-.7 1-4.8 1.8-7.8-1.6-11.3.3V21a1.5 1.5 0 0 1-3 0V4A1.5 1.5 0 0 1 5 2.5Z"/></symbol>' +
+    '<symbol id="i-gift" viewBox="0 0 24 24"><path d="M3 8.5h18v4H3zM4.5 12.5h15V21h-15z"/><path d="M12 8.5c-1.5-3.6-6.2-5.4-6.2-2.6 0 1.6 2.4 2.6 6.2 2.6Zm0 0c1.5-3.6 6.2-5.4 6.2-2.6 0 1.6-2.4 2.6-6.2 2.6ZM12 8.5V21" fill="none" stroke="#fff" stroke-width="1.8"/></symbol>' +
+    '<symbol id="i-chat" viewBox="0 0 24 24"><path d="M12 3c5.5 0 10 3.6 10 8.2 0 4.5-4.5 8.1-10 8.1-1 0-2-.1-2.9-.3L4.3 21.3c-.5.2-1-.2-.9-.7l.9-3.5C2.9 15.6 2 13.5 2 11.2 2 6.6 6.5 3 12 3Z"/></symbol>' +
+    '<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 2.9 6.4 7 .7-5.2 4.7 1.5 6.9L12 17.2l-6.2 3.5 1.5-6.9L2.1 9.1l7-.7L12 2Z"/></symbol>' +
+    '<symbol id="i-cards" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M9.2 2.3 19.4 5a1.6 1.6 0 0 1 1.1 2l-3.6 13.4a1.6 1.6 0 0 1-2 1.1L4.7 18.8a1.6 1.6 0 0 1-1.1-2L7.2 3.4a1.6 1.6 0 0 1 2-1.1Zm-.1 2.5L5.9 16.7l9.4 2.5 3.2-11.9-9.4-2.5Z"/></symbol>' +
+    '<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="7.5" r="4"/><path d="M1.5 20c0-4 3.4-6.8 7.5-6.8s7.5 2.8 7.5 6.8v.5h-15V20Z"/><circle cx="17.3" cy="8.5" r="3.2"/><path d="M17.5 13.3c3 0 5 2.2 5 5.4v.6h-4.6c-.2-2.4-1.2-4.4-2.8-5.8.8-.1 1.6-.2 2.4-.2Z"/></symbol>' +
+    '<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-9.5-5.6-9.5-12A5.3 5.3 0 0 1 12 6a5.3 5.3 0 0 1 9.5 3c0 6.4-9.5 12-9.5 12Z"/></symbol>' +
+    '</svg>';
+  document.body.insertAdjacentHTML('afterbegin', sprite);
+})();

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 888 580">
+  <title>クレアクラン</title>
+  <path fill="#76d7e7" d="M0 580 136 282V580Z"/>
+  <path fill="#fe9599" d="M136 282 211 152 286 282Z"/>
+  <path fill="#f96e09" d="M136 282H286V432H136Z"/>
+  <path fill="#78c0a8" d="M136 432H286V580H136Z"/>
+  <path fill="#f96e09" d="M286 432H586V580H524A87 87 0 0 0 350 580H286Z"/>
+  <path fill="#fe9599" d="M436 132 511 0 586 132Z"/>
+  <path fill="#78c0a8" d="M436 132H586V282H436Z"/>
+  <path fill="#76d7e7" d="M436 282H586V432H436Z"/>
+  <path fill="#76d7e7" d="M586 432 736 580H586Z"/>
+  <path fill="#fe9599" d="M738 282A75 75 0 0 1 888 282Z"/>
+  <path fill="#f96e09" d="M738 282H888V432H738Z"/>
+  <path fill="#78c0a8" d="M738 432H888V580H738Z"/>
+</svg>
