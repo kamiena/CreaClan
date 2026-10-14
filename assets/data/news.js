@@ -40,11 +40,11 @@ window.CC_NEWS_CATEGORIES = {
 
 window.CC_NEWS = [
   {
-    id: "2026-10-12-renewal",
-    date: "2026-10-12",
+    id: "2026-10-14-renewal",
+    date: "2026-10-14",
     category: "info",
     title: "公式ホームページをリニューアルしました！",
-    image: "assets/img/news/2026-10-12-renewal.webp",
+    image: "assets/img/news/2026-10-14-renewal.webp",
     imageAlt: "クレアクランのロゴと、看板娘のクレア・メイナ・クマチ",
     body: `
 クレアクラン公式ホームページをリニューアルしました！🎉

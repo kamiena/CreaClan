@@ -3,7 +3,7 @@
 クレアクラン（CREA CLAN）公式サイトです。
 ビルド不要の静的サイト（HTML / CSS / JavaScript）なので、GitHub Pages にそのまま置いて公開できます。
 
-- 公開予定URL：https://kamiena.github.io/CreaClan/
+- 公開URL：https://kamiena.github.io/CreaClan/（`main` ブランチの内容が公開されます）
 - デザイン：白ベース × ロゴの積み木カラー（オレンジ・ピンク・水色・ミント・クリーム）。見出しはアルファベットの積み木、フッターは積み木の街並み。
 
 ## ページ構成
@@ -52,7 +52,7 @@
    ```
 
 3. `node tools/check-data.mjs` を実行して、書き間違いがないか確認します（`sitemap.xml` も自動で更新されます）。
-4. `main` ブランチに push すると、数分でサイトに反映されます。
+4. `main` ブランチに反映（push、または作業ブランチのプルリクエストをマージ）すると、数分でサイトに反映されます。
 
 | category | 表示 | 色 |
 | --- | --- | --- |
@@ -108,9 +108,9 @@ python3 -m http.server 8000
 
 ## 公開（GitHub Pages）
 
-1. このリポジトリの **Settings → Pages** を開く
-2. Source を **Deploy from a branch**、Branch を `main` / `/ (root)` にして保存
-3. 数分後に https://kamiena.github.io/CreaClan/ で公開されます
+GitHub Pages で公開しています（**Settings → Pages**：Deploy from a branch、`main` / `/ (root)`）。
+`main` ブランチに変更が入ると、数分で https://kamiena.github.io/CreaClan/ に反映されます。
+Claude の作業ブランチ（`claude/…`）に入れただけでは公開されないので、`main` に反映するのを忘れずに。
 
 **公開後にやること（旧サイトからの切り替え）**
 
@@ -161,12 +161,11 @@ tools/
 - 組み合わせて作った画像（描き足し・背景の切り抜きはしていません）
   - `assets/img/logo/logo-h-*.webp`：ロゴの積み木と文字を横に並べたもの（ヘッダー用）
   - `assets/img/works/crea-run/kv.webp`・`assets/img/pickup/crea-run.webp`：タイトル画面の床＋ロゴ＋ロケットに乗ったクレアちゃん
-  - `assets/img/ogp.jpg`・`assets/img/news/2026-10-12-renewal.webp`：積み木の床＋ロゴ＋看板娘3人（SNS でシェアされたときの画像）
+  - `assets/img/ogp.jpg`・`assets/img/news/2026-10-14-renewal.webp`：積み木の床＋ロゴ＋看板娘3人（SNS でシェアされたときの画像）
   - `assets/img/news/prj-rain.webp`：正方形の画像の左右を、同じ画像のぼかしで埋めたもの
 - `assets/img/logo/mark.svg`・`favicon.svg` は、ロゴの積み木を図形で描き直したもの（形・色はロゴと同じ）です。
 
 ## 確認してほしいところ
 
-- 「公式ホームページをリニューアルしました！」のニュースの日付（`2026-10-12`）は、実際に公開する日に合わせて変更してください。
 - 『トラップス』のクマチの紹介文は、トラップス公式サイトの紹介文（仮）をもとにしています。
 - 旧サイトの「App Store」リンクは現在ページが無くなっているため、「スマートフォン版は現在公開停止中」と表記しています。

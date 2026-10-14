@@ -20,7 +20,7 @@
    - 作品の情報（価格・配信日・状態など）→ `assets/data/works.js`
 5. `node tools/check-data.mjs` を実行してエラーがないことを確認する（`sitemap.xml` も更新される）。
 6. できればブラウザで `news.html?id=<id>` とトップを確認する（`python3 -m http.server 8000`）。
-7. コミットしてプッシュする。
+7. コミットしてプッシュする。公開されるのは `main` ブランチ（GitHub Pages：`main` / `(root)`）。作業ブランチにプッシュしただけでは公開されないので、公開まで頼まれたら `main` にも反映し、数分後に https://kamiena.github.io/CreaClan/ で表示を確認する。
 
 ### 文章のトーン
 
