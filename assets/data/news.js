@@ -89,10 +89,17 @@ window.CC_NEWS = [
 
 芸術祭「Festival Octobre Numérique – Faire Monde 2026」のメインプログラムとしての展示です（会期：10月10日〜11月8日）。
 日本語ボイスは東山奈央さん、英語ボイスは天城サリーさん。カミエナにとって、人生初の海外出展になりました！
+
+## 追記（10/28）
+カミエナが現地アルルの「Anima Ludens」を訪れました！
+『8番出口』をはじめ、尊敬するクリエイターの方々の作品と同じ空間で展示され、平日にもかかわらず、現地の子どもたちやアーティストの方々にたくさん遊んでいただきました✨
+
+![アルルの展示会場で『ARE YOU THERE?』を遊ぶ来場者](assets/img/news/2026-10-10-are-you-there-arles.webp)
 `,
     links: [
       { label: "PRJ CÔGEIMU 公式サイト", url: "https://kamiena.github.io/cogeimu/" },
       { label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2108573541897793794" },
+      { label: "現地レポート（X）", url: "https://x.com/KamiEna_Game/status/2115108832796135467" },
     ],
   },
   {

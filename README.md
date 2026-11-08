@@ -137,7 +137,7 @@ Claude の作業ブランチ（`claude/…`）に入れただけでは公開さ�
 
 ## 更新するときの注意
 
-- CSS や JS（`assets/css/style.css`・`assets/js/*.js`）を変えたら、全 HTML の `?v=20261108` の数字を新しくしてください（見に来た人のブラウザに古いファイルが残らないように）。データファイル（`assets/data/*.js`）は不要です。
+- CSS や JS（`assets/css/style.css`・`assets/js/*.js`）を変えたら、全 HTML の `?v=20261108b` の数字を新しくしてください（見に来た人のブラウザに古いファイルが残らないように）。データファイル（`assets/data/*.js`）は不要です。
 - ヘッダー・フッターは `index.html` と `404.html` に同じものが入っています（404 では `./#news` のように、トップページの場所を指しています）。メニューを変えるときは両方を書き換えてください。
 - JavaScript がオフのときは、ニュースや作品の一覧のかわりに案内文が表示されます。
 
@@ -160,7 +160,7 @@ assets/
   data/goods.js            … グッズ
   data/pickup.js           … トップのスライド
   img/                     … 画像（logo, bg, pickup, works, chara, news, goods, creators, contents）
-                             chara/*-full.webp は看板娘の全身（ABOUT）、works/new/ は「？？？」の新作
+                             works/new/ は「？？？」の新作
 tools/
   check-data.mjs           … データの確認と sitemap.xml の更新
   update_fonts.py          … fonts.css の作り直し

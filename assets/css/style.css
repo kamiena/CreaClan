@@ -645,7 +645,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 calc(var(--edge) + 4px
 .prose ul li { position: relative; padding-left: 1.4em; }
 .prose ul li::before { content: ""; position: absolute; left: .2em; top: .78em; width: .55em; height: .55em; border-radius: 2px; background: var(--mint); box-shadow: 0 2px 0 var(--mint-deep); }
 .prose figure { margin: 1.6em 0; max-width: 680px; }
-.prose figure img { width: 100%; border-radius: 18px; border: 3px solid var(--line); }
+.prose figure img { width: auto; max-width: 100%; max-height: 560px; margin-inline: auto; border-radius: 18px; border: 3px solid var(--line); } /* 縦長の写真は高さを抑える */
 .prose figcaption { margin-top: 6px; color: var(--muted); font-size: 13px; text-align: center; }
 .prose hr { border: 0; height: 3px; margin: 2em 0; background: var(--line); border-radius: 2px; }
 .prose a { word-break: break-all; }
@@ -752,12 +752,12 @@ a.work-card__visual:hover img { transform: scale(1.04); }
 .chara-card:hover { transform: translateY(-4px); box-shadow: 0 calc(var(--edge) + 4px) 0 var(--c-light); }
 .chara-card__img {
   position: relative; display: flex; align-items: flex-end; justify-content: center;
-  height: 300px; padding-top: 16px; overflow: hidden;
+  height: 250px; padding: 22px 0 14px; overflow: hidden;
   background:
     radial-gradient(ellipse 70% 26% at 50% 100%, var(--c-light) 0 98%, transparent 100%),
     repeating-linear-gradient(-45deg, var(--c-soft) 0 14px, #fff 14px 28px);
 }
-.chara-card__img img { width: auto; height: 100%; max-width: 92%; object-fit: contain; filter: drop-shadow(0 6px 6px rgba(95, 66, 62, .18)); transition: transform .35s cubic-bezier(.3, 1.7, .5, 1); }
+.chara-card__img img { width: auto; height: 100%; max-width: 86%; object-fit: contain; filter: drop-shadow(0 6px 6px rgba(95, 66, 62, .18)); transition: transform .35s cubic-bezier(.3, 1.7, .5, 1); }
 .chara-card:hover .chara-card__img img { transform: translateY(-6px) rotate(-2deg); }
 .chara-card__body { display: grid; justify-items: start; align-content: start; gap: 4px; padding: 16px 20px 20px; }
 .chara-card__name { font-size: 21px; font-weight: 800; letter-spacing: .12em; line-height: 1.4; }
@@ -766,9 +766,8 @@ a.work-card__visual:hover img { transform: scale(1.04); }
 .chara-card__text { margin-top: 6px; font-size: 13.5px; line-height: 1.8; }
 @media (max-width: 759.98px) {
   .chara-card { flex-direction: row; }
-  .chara-card__img { flex: 0 0 36%; height: auto; min-height: 220px; padding-top: 10px; }
-  .chara-card__img img { position: absolute; bottom: 0; left: 50%; height: 94%; transform: translateX(-50%); }
-  .chara-card:hover .chara-card__img img { transform: translateX(-50%) translateY(-4px); }
+  .chara-card__img { flex: 0 0 38%; height: auto; min-height: 180px; padding: 12px 6px; align-items: center; }
+  .chara-card__img img { width: 100%; height: auto; max-width: 150px; }
   .chara-card__body { padding: 16px 16px 18px; }
   .chara-card__text { font-size: 13px; }
   .chara-card__work { padding: 1px 10px; font-size: 12px; white-space: nowrap; }
