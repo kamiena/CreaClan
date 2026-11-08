@@ -20,12 +20,12 @@ window.CC_PICKUP = [
     color: "mint",
   },
   {
-    image: "assets/img/pickup/new.webp",
-    alt: "NEW GAME 新作、開発中…！",
-    label: "新作",
-    title: "新作ゲーム、開発中…！？",
-    url: "#works",
-    color: "sky",
+    image: "assets/img/pickup/kaiwai-hall.webp",
+    alt: "BSフジ『界隈ほーる』で、近藤春菜さんが『ガーデンハント』をプレイ",
+    label: "テレビ",
+    title: "BSフジ『界隈ほーる』で、近藤春菜さんが『ガーデンハント』をプレイ！",
+    url: "#media",
+    color: "pink",
   },
   {
     image: "assets/img/pickup/traps.webp",
@@ -34,14 +34,6 @@ window.CC_PICKUP = [
     title: "新作カードゲーム『トラップス』開発中！",
     url: "https://kamiena.github.io/Traps/",
     color: "orange",
-  },
-  {
-    image: "assets/img/pickup/kaiwai-hall.webp",
-    alt: "BSフジ『界隈ほーる』で、近藤春菜さんが『ガーデンハント』をプレイ",
-    label: "テレビ",
-    title: "BSフジ『界隈ほーる』で、近藤春菜さんが『ガーデンハント』をプレイ！",
-    url: "#media",
-    color: "pink",
   },
   {
     image: "assets/img/pickup/crea-run-30000dl.webp",

@@ -584,6 +584,16 @@
     initReveal();
     openFromHash();
     window.addEventListener('hashchange', openFromHash);
+    // ロゴ・「ページの先頭へ」は、いちばん上までスクロール（#top はくっついてくるヘッダーなので、そのままだと位置がずれる）
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href="#top"]');
+      if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault();
+      var toggle = $('.menu-toggle');
+      if (toggle && document.documentElement.classList.contains('is-menu-open')) toggle.click();
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      if (location.hash && history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    });
     // ほかの場所（スライドなど）の「#news-<id>」リンクは、そのニュースを開いてスクロール
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href^="#news-"]');
