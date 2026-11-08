@@ -5,6 +5,7 @@
      トップページの「GOODS」に、上から順に自動で表示されます。
    ▼ status（販売のようす）の種類
      "booth"（BOOTHで販売中） / "event"（イベントで頒布） / "soon"（販売予定）
+   ▼ link は BOOTH で買えるものだけ付けます（イベントで販売しているものは付けない）。
    ▼ 画像は assets/img/goods/ に入れてください（正方形か 16:9）。
    ========================================================================== */
 
@@ -15,7 +16,6 @@ window.CC_GOODS = [
     status: "event",
     image: "assets/img/goods/plush.webp",
     description: "ずっと夢だった「ぬいぐるみ化」が実現！ Made in Heaven様の協力で制作した、『ガーデンハント』の主人公メイナのぬいぐるみ。2026年10月の全国エンタメまつり（ぜんため）で販売をスタートし、今後も各地のイベントで販売予定です。",
-    link: { label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2101627937061556581" },
   },
   {
     name: "ちびキャラ アクスタ（メイナ・クレア・クマチ）",
@@ -23,7 +23,6 @@ window.CC_GOODS = [
     status: "event",
     image: "assets/img/goods/chibi-acsta.webp",
     description: "看板娘3人のちびキャラ・アクリルスタンド。並べて飾りたくなるデザインで、コミックマーケット108で初頒布しました。",
-    link: { label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2088432357695271340" },
   },
   {
     name: "メイナ ミニフィギュア",
@@ -31,7 +30,6 @@ window.CC_GOODS = [
     status: "event",
     image: "assets/img/goods/figure.webp",
     description: "Trend3D様の3Dプリンターで制作。ゲームの中の kawaii さを、なめらかな曲線で再現しました。",
-    link: { label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1964983203388940475" },
   },
   {
     name: "ゲーム機アクキー",
@@ -63,7 +61,6 @@ window.CC_GOODS = [
     status: "event",
     image: "assets/img/goods/sticker.webp",
     description: "代表カミエナの処女作『ちんあなご』のステッカー。チンアナゴとニシキアナゴ、どっちがどっち？",
-    link: { label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1992132737097154945" },
   },
   {
     name: "クレア アクリルスタンド",
@@ -71,7 +68,6 @@ window.CC_GOODS = [
     status: "event",
     image: "assets/img/goods/crea-acsta.webp",
     description: "はじめて作ったオリジナルのアクリルグッズ。看板娘クレアのアクリルスタンドとミニアクリルキーホルダーを、コミックマーケット102で頒布しました。",
-    link: { label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1690490118359113728" },
   },
 ];
 

@@ -9,7 +9,8 @@
      {
        id: "2026-10-20-sample",        // ニュースの名前（URLの #news-<id> になる。半角英数字とハイフン。ほかと重ならないように）
        date: "2026-10-20",             // 日付（YYYY-MM-DD）
-       category: "info",               // info / release / event / media / goods（下の CC_NEWS_CATEGORIES）
+       category: "info",               // info / release / event / goods（下の CC_NEWS_CATEGORIES）
+                                       // ※メディア掲載はニュースに載せず、media.js にまとめます
        title: "タイトル",
        image: "assets/img/news/2026-10-20-sample.webp", // 画像（16:9がおすすめ。なくてもOK）
        work: "garden-hunt",            // 関係する作品（works.js の id。なくてもOK）
@@ -34,7 +35,6 @@ window.CC_NEWS_CATEGORIES = {
   info:    { label: "お知らせ", color: "orange" },
   release: { label: "作品",     color: "pink" },
   event:   { label: "イベント", color: "mint" },
-  media:   { label: "メディア", color: "sky" },
   goods:   { label: "グッズ",   color: "yellow" },
 };
 
@@ -105,34 +105,6 @@ window.CC_NEWS = [
 `,
   },
   {
-    id: "2026-10-10-are-you-there",
-    date: "2026-10-10",
-    category: "event",
-    title: "代表カミエナが手がける『ARE YOU THERE?』が、フランスの芸術祭で世界初公開！",
-    image: "assets/img/news/2026-10-10-are-you-there.webp",
-    imageAlt: "『ARE YOU THERE?』銅の少女の像",
-    body: `
-代表のカミエナが企画・ディレクション・プロデュースを手がける、工芸×ゲームのゲームアート『PRJ CÔGEIMU 02 Kagane「ARE YOU THERE?」』が、フランス・アルルの国際展「Anima Ludens」で世界初公開されました！✨
-
-芸術祭「Festival Octobre Numérique – Faire Monde 2026」のメインプログラムとしての展示です（会期：10月10日〜11月8日）。
-日本語ボイスは東山奈央さん、英語ボイスは天城サリーさん。カミエナにとって、人生初の海外出展になりました！
-会場は、歴史あるトリニテール礼拝堂です。
-
-![展示会場のトリニテール礼拝堂](assets/img/news/2026-10-10-are-you-there-chapel.webp)
-
-## 追記（10/28）
-カミエナが現地アルルの「Anima Ludens」を訪れました！
-『8番出口』をはじめ、尊敬するクリエイターの方々の作品と同じ空間で展示され、平日にもかかわらず、現地の子どもたちやアーティストの方々にたくさん遊んでいただきました✨
-
-![アルルの展示会場で『ARE YOU THERE?』を遊ぶ来場者](assets/img/news/2026-10-10-are-you-there-arles.webp)
-`,
-    links: [
-      { label: "PRJ CÔGEIMU 公式サイト", url: "https://kamiena.github.io/cogeimu/" },
-      { label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2108573541897793794" },
-      { label: "現地レポート（X）", url: "https://x.com/KamiEna_Game/status/2115108832796135467" },
-    ],
-  },
-  {
     id: "2026-09-20-meina-plush",
     date: "2026-09-20",
     category: "goods",
@@ -151,20 +123,6 @@ window.CC_NEWS = [
 【追記】10月の「全国エンタメまつり（ぜんため）」で販売をスタートしました！ 今後も各地のイベントで販売予定です♪
 `,
     links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2101627937061556581" }],
-  },
-  {
-    id: "2026-08-18-gamezensen",
-    date: "2026-08-18",
-    category: "media",
-    title: "ゲーム前線様に『ガーデンハント』のレビューを掲載いただきました",
-    image: "assets/img/works/garden-hunt/ss-8.webp",
-    work: "garden-hunt",
-    body: `
-『ガーデンハント』のくわしいレビュー記事を掲載していただきました！
-
-▼記事
-[【徹底解説】ガーデンハント レビュー「パックマンライクなゲーム」（まとめ画像付き）](https://gamezensen.hatenablog.com/entry/Garden_Hunt_rreview)
-`,
   },
   {
     id: "2026-08-15-c108",
@@ -236,18 +194,6 @@ window.CC_NEWS = [
     links: [{ label: "ガイドラインを見る", url: "#guideline" }],
   },
   {
-    id: "2026-07-07-kaiwai-hall-10",
-    date: "2026-07-07",
-    category: "media",
-    title: "BSフジ『界隈ほーる』#10「インディーゲーム界隈」第2弾に、代表のカミエナが出演しました",
-    body: `
-BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#10「インディーゲーム界隈」第2弾に、代表のカミエナが出演しました！
-
-BitSummit を取材した、インディーゲーム特集の第2弾です。番組は、BSフジ公式の YouTube チャンネルでもご覧いただけます。
-`,
-    links: [{ label: "番組を見る（YouTube）", url: "https://www.youtube.com/watch?v=aq1FHu8H-Mg" }],
-  },
-  {
     id: "2026-05-20-404-game-center",
     date: "2026-05-20",
     category: "event",
@@ -303,25 +249,6 @@ Made in Heaven様にご協力いただき、制作を進めています。完成
     links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2051978733859569897" }],
   },
   {
-    id: "2026-05-05-kaiwai-hall-4",
-    date: "2026-05-05",
-    category: "media",
-    title: "BSフジ『界隈ほーる』で『ガーデンハント』が紹介されました！",
-    image: "assets/img/news/2026-05-05-kaiwai-hall.webp",
-    imageAlt: "BSフジ『界隈ほーる』で、近藤春菜さんが『ガーデンハント』をプレイ",
-    work: "garden-hunt",
-    body: `
-BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インディーゲーム界隈」に、代表のカミエナが出演しました！
-
-番組では渋谷サクラステージの「404 Not Found」を訪問し、インディーゲームクリエイターとしてインタビューを受けました。
-『ガーデンハント』も紹介していただき、スタジオでは近藤春菜さんに実際にプレイしていただきました！
-`,
-    links: [
-      { label: "番組を見る（YouTube）", url: "https://www.youtube.com/watch?v=DnmBOhPELe0&t=199s" },
-      { label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2051267208131772900" },
-    ],
-  },
-  {
     id: "2026-05-03-tgd12",
     date: "2026-05-03",
     category: "event",
@@ -337,20 +264,6 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
 `,
   },
   {
-    id: "2026-02-13-gamemakers",
-    date: "2026-02-13",
-    category: "media",
-    title: "ゲームメーカーズ様に『ガーデンハント』を掲載いただきました",
-    image: "assets/img/works/garden-hunt/ss-5.webp",
-    work: "garden-hunt",
-    body: `
-「SHIBUYA GAMES WEEK 2026」の現地レポート記事で、『ガーデンハント』を取り上げていただきました！
-
-▼記事
-[初開催の「SHIBUYA GAMES WEEK 2026」現地レポート！ゲームを楽しむ、そして“ゲームを通じて渋谷の街を知る”都市型ゲームフェス](https://gamemakers.jp/article/2026_02_13_131159/)
-`,
-  },
-  {
     id: "2026-02-06-shibuya-games-week",
     date: "2026-02-06",
     category: "event",
@@ -362,32 +275,10 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
 渋谷の街を舞台にした都市型ゲームフェス「SHIBUYA GAMES WEEK 2026」（2月6日〜15日）の「エキマエゲームパーク」（渋谷サクラステージ3階）に、『ガーデンハント』を出展しました！
 渋谷の巨大モニターから、メイナの声が鳴り響いていました♪
 
-さらに、代表カミエナが手がける『CÔGEIMU』も「404 ゲームセンター」で展示され、2作品同時の出展になりました✨
-
 ![エキマエゲームパークの展示](assets/img/news/2026-02-06-shibuya-games-week-booth.webp)
 
-![404 ゲームセンターの『CÔGEIMU』](assets/img/news/2026-02-06-cogeimu-404.webp)
-
-4Gamer.net様やYahoo!ニュースにも取り上げていただきました！
-
-▼関連記事
-[渋谷の街をゲームがジャック！「SHIBUYA GAMES WEEK 2026」が本日開幕（Yahoo!ニュース）](https://news.yahoo.co.jp/expert/articles/462e39e3aeae041c6d96e8cfef97c62e79add002)
 `,
     links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2019650151586107882" }],
-  },
-  {
-    id: "2026-02-06-4gamer",
-    date: "2026-02-06",
-    category: "media",
-    title: "4Gamer.net様に『ガーデンハント』を掲載いただきました",
-    image: "assets/img/works/garden-hunt/ss-6.webp",
-    work: "garden-hunt",
-    body: `
-都市型ゲームフェス「SHIBUYA GAMES WEEK」で遊べるインディーゲームのまとめ記事で、『ガーデンハント』を紹介していただきました！
-
-▼記事
-[渋谷に行くなら，ふらりとゲームも楽しもう。都市型ゲームフェス「SHIBUYA GAMES WEEK」で遊べるインディーゲームまとめ](https://www.4gamer.net/games/991/G999110/20260206031/)
-`,
   },
   {
     id: "2026-01-23-figure",
@@ -403,48 +294,6 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
 イベント会場だけでなく、オンライン販売も予定しています。詳細をお待ちください♪
 `,
     links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2014652199855599669" }],
-  },
-  {
-    id: "2026-01-20-mudauchi",
-    date: "2026-01-20",
-    category: "media",
-    title: "ムダウチゲームズ様に『ガーデンハント』を掲載いただきました",
-    image: "assets/img/works/garden-hunt/ss-2.webp",
-    work: "garden-hunt",
-    body: `
-配信開始にあわせて、『ガーデンハント』を紹介していただきました！
-
-▼記事
-[『ガーデンハント』“あの角を曲がったら…？”のドキドキ感がやみつきになる！ヌメヌメ×おにごっこアクションが1月16日に配信開始。](https://mudauchi.info/428906)
-`,
-  },
-  {
-    id: "2026-01-17-dengeki",
-    date: "2026-01-17",
-    category: "media",
-    title: "電撃オンライン様に『ガーデンハント』を掲載いただきました",
-    image: "assets/img/works/garden-hunt/ss-3.webp",
-    work: "garden-hunt",
-    body: `
-配信開始にあわせて、『ガーデンハント』を紹介していただきました！
-
-▼記事
-[ドットイート風ヌメヌメ×おにごっこアクション『ガーデンハント』が配信。ヌメヌメシステムが戦略要素をアツくする](https://dengekionline.com/article/202601/63360)
-`,
-  },
-  {
-    id: "2026-01-16-gamewith",
-    date: "2026-01-16",
-    category: "media",
-    title: "GameWith様に『ガーデンハント』を掲載いただきました",
-    image: "assets/img/works/garden-hunt/ss-1.webp",
-    work: "garden-hunt",
-    body: `
-配信開始にあわせて、『ガーデンハント』を紹介していただきました！
-
-▼記事
-[『ガーデンハント』1月16日から発売開始！スライムを集めるドットイート風のヌメヌメおにごっこゲーム](https://gamewith.jp/gamedb/13858/articles/52181)
-`,
   },
   {
     id: "2026-01-16-garden-hunt-release",
@@ -576,20 +425,6 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
 ストーリーパートのマンガ表現は炒芽もやしさん、オババ役は森沢 芙美さんにご担当いただいています。
 `,
     links: [{ label: "ボイスを聞く（X）", url: "https://x.com/KamiEna_Game/status/2003420323929104496" }],
-  },
-  {
-    id: "2025-12-06-automaton-west",
-    date: "2025-12-06",
-    category: "media",
-    title: "AUTOMATON WEST様（英語）に『ガーデンハント』を掲載いただきました",
-    image: "assets/img/works/garden-hunt/ss-7.webp",
-    work: "garden-hunt",
-    body: `
-海外向けゲームメディア AUTOMATON WEST 様の、屋外が舞台の日本のインディーゲーム5本を紹介する記事で、『ガーデンハント』を取り上げていただきました！（英語の記事です）
-
-▼記事
-[Garden slug-girl action, masochistic platforming and summer vacation nostalgia: 5 outdoorsy Japanese indie games](https://automaton-media.com/en/news/garden-slug-girl-action-masochistic-platforming-and-summer-vacation-nostalgia-5-outdoorsy-japanese-indie-games/)
-`,
   },
   {
     id: "2025-11-22-sakura-creators-market",
@@ -761,36 +596,6 @@ DMM.com様の本社で開催されるイベント「ゲーム世界展開会議�
     links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1926986185915724251" }],
   },
   {
-    id: "2025-05-16-indie-freaks",
-    date: "2025-05-16",
-    category: "media",
-    title: "Indie Freaks様に開発中の新作ゲーム「ガーデン ハント」を特集して頂けました！",
-    image: "assets/img/news/prj-rain.webp",
-    imageAlt: "『PRJ rain（仮）』（現『ガーデンハント』）",
-    work: "garden-hunt",
-    body: `
-東京ゲームダンジョン8に出展した、開発中の新作『PRJ rain（仮）』（現『ガーデンハント』）のブースレポートを掲載していただきました！
-
-▼記事
-[ヌメヌメっと滑りながら庭園迷路を駆け回るアクションゲーム『PRJ rain（仮）』ブースレポート【東京ゲームダンジョン8】](https://www.indie-freaks.com/2025/05/tgd8-prj-rain)
-`,
-  },
-  {
-    id: "2025-05-09-realsound",
-    date: "2025-05-09",
-    category: "media",
-    title: "リアルサウンド テック様に東京ゲームダンジョン8の出展ゲームを取り上げて頂きました",
-    image: "assets/img/news/prj-rain.webp",
-    imageAlt: "『PRJ rain（仮）』（現『ガーデンハント』）",
-    work: "garden-hunt",
-    body: `
-「東京ゲームダンジョン8」の会場レポートで、出展した『PRJ rain（仮）』（現『ガーデンハント』）を取り上げていただきました！
-
-▼記事
-[レトロでかわいいタワーディフェンスから、子どもの大好きな“アレ”題材のアクションまで　「東京ゲームダンジョン8」会場レポート](https://realsound.jp/tech/2025/05/post-2013950.html)
-`,
-  },
-  {
     id: "2025-05-04-tgd8",
     date: "2025-05-04",
     category: "event",
@@ -933,21 +738,6 @@ It was so lively at Winter Comiket, you could really feel the excitement despite
 We’ll keep working hard on game development, and we hope you’ll continue to support us!
 `,
     links: [{ label: "BOOTH 販売ページ", url: "https://creaclan.booth.pm/items/6448523" }],
-  },
-  {
-    id: "2025-01-02-gamespark",
-    date: "2025-01-02",
-    category: "media",
-    title: "Game*Spark様にC105出展ゲームを取り上げて頂きました",
-    image: "assets/img/news/prj-rain.webp",
-    imageAlt: "『PRJ rain（仮）』（現『ガーデンハント』）",
-    work: "garden-hunt",
-    body: `
-「コミックマーケット105」のインディーゲームブースレポートで、出展した『PRJ rain（仮）』（現『ガーデンハント』）を取り上げていただきました！
-
-▼記事
-[「コミックマーケット105」インディーゲームブースレポート！ 昔ながらのイベントで出会った魅力的な作品を3本ピックアップ](https://www.gamespark.jp/article/2025/01/02/148188.html)
-`,
   },
   {
     id: "2024-11-08-c105",

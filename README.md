@@ -15,19 +15,21 @@
 | （いちばん上） | ピックアップ（スライド）と、各場所へのショートカット |
 | `#news` | ニュース。カテゴリーで絞り込み・「もっと見る」。タイトルを押すと、その場で本文が開きます |
 | `#news-<id>` | そのニュースを開いた状態で表示（X などで共有するときのURL） |
-| `#works` | 作品。概要・価格・プラットフォームなどをカードで表示し、各作品の公式サイトへ1クリックで移動 |
-| `#about` | クレアクランとは（紹介文・数字・看板娘・代表カミエナ） |
+| `#works` | 作品（リリース順）。概要・価格・プラットフォームなどをカードで表示し、各作品の公式サイトへ1クリックで移動 |
+| `#media` | メディア掲載・実況動画（テレビ／WEB記事／実況・プレイ動画。はじめは一部だけ表示し「もっと見る」で全部） |
+| `#about` | クレアクランとは（紹介文・看板娘・代表カミエナ） |
 | `#history` | これまでのあゆみ（年表。はじめは途中まで表示し「すべて見る」で全部） |
-| `#contents` | ラジオ・動画・ショップ・公式X |
+| `#contents` | クレアクラン放送局（YouTube）・代表カミエナの発信・BOOTH・公式X |
 | `#goods` | グッズ |
 | `#guideline` | ゲーム実況・動画配信ガイドライン（全文） |
 
-ヘッダーのメニュー（NEWS / WORKS / ABOUT / CONTENTS / GOODS / 配信ガイドライン）を押すと、その場所までスクロールします。
+ヘッダーのメニュー（NEWS / WORKS / MEDIA / ABOUT / CONTENTS / GOODS / 配信ガイドライン）を押すと、その場所までスクロールします。
 
 - `news.html` `works.html` `about.html` `creators.html` `creator-kamiena.html` `goods.html` `guideline.html` は、以前のページのURLから来た人を、トップページの該当する場所へ転送するためだけのページです（`news.html?id=記事のid` → `#news-記事のid`）。
 - `404.html` … ページが見つからないとき
 
-ニュース・作品・グッズ・ピックアップは、`assets/data/` のデータファイルから自動で表示しています。
+ニュース・作品・メディア掲載・グッズ・ピックアップは、`assets/data/` のデータファイルから自動で表示しています。
+**ニュースには、メディア掲載は載せません**（MEDIA 欄の `assets/data/media.js` にまとめます）。
 **ふだんの更新は、データファイルを書き換えるだけ**で、トップページに反映されます。
 
 ## ニュースを追加する（いちばんよく使う作業）
@@ -66,7 +68,6 @@
 | `info` | お知らせ | オレンジ |
 | `release` | 作品 | ピンク |
 | `event` | イベント | ミント |
-| `media` | メディア | 水色 |
 | `goods` | グッズ | クリーム |
 
 **本文で使える書き方**
@@ -91,9 +92,11 @@
 | --- | --- |
 | トップのスライド（ピックアップ）を変える | `assets/data/pickup.js`（画像は `assets/img/pickup/`、1600×900。リンク先はURLか `#works`・`#news-ニュースのid` など） |
 | 作品を追加・変更する | `assets/data/works.js`（画像は `assets/img/works/<作品のid>/`）。まだ発表前の作品は `secret: true` で「？？？」のカードになります |
-| グッズを追加する | `assets/data/goods.js`（画像は `assets/img/goods/`） |
+| グッズを追加する | `assets/data/goods.js`（画像は `assets/img/goods/`。`link` は BOOTH で買えるものだけ） |
+| メディア掲載・実況動画を足す | `assets/data/media.js`（WEB記事は `articles`、テレビは `tv`、実況動画は `videos` に YouTube の動画ID） |
 | 「これまでのあゆみ」を足す | `index.html` の `HISTORY`（`<section … id="history">`）のところ |
 | 紹介文・看板娘・代表の紹介を変える | `index.html` の `ABOUT`（`<section … id="about">`）のところ |
+| YouTube・SNS・ショップの案内を変える | `index.html` の `CONTENTS`（`<section … id="contents">`）のところ |
 | 配信ガイドラインを変える | `index.html` の `GUIDELINE`（`<section … id="guideline">`）のところ |
 
 データを書き換えたら、毎回 `node tools/check-data.mjs` で確認してください。
@@ -137,7 +140,7 @@ Claude の作業ブランチ（`claude/…`）に入れただけでは公開さ�
 
 ## 更新するときの注意
 
-- CSS や JS（`assets/css/style.css`・`assets/js/*.js`）を変えたら、全 HTML の `?v=20261108b` の数字を新しくしてください（見に来た人のブラウザに古いファイルが残らないように）。データファイル（`assets/data/*.js`）は不要です。
+- CSS や JS（`assets/css/style.css`・`assets/js/*.js`）を変えたら、全 HTML の `?v=20261109` の数字を新しくしてください（見に来た人のブラウザに古いファイルが残らないように）。データファイル（`assets/data/*.js`）は不要です。
 - ヘッダー・フッターは `index.html` と `404.html` に同じものが入っています（404 では `./#news` のように、トップページの場所を指しています）。メニューを変えるときは両方を書き換えてください。
 - JavaScript がオフのときは、ニュースや作品の一覧のかわりに案内文が表示されます。
 
@@ -159,6 +162,7 @@ assets/
   data/works.js            … 作品
   data/goods.js            … グッズ
   data/pickup.js           … トップのスライド
+  data/media.js            … メディア掲載・実況動画
   img/                     … 画像（logo, bg, pickup, works, chara, news, goods, creators, contents）
                              works/new/ は「？？？」の新作
 tools/
@@ -170,7 +174,7 @@ tools/
 
 - 旧公式HP（Google サイト）、各作品の公式サイト、カミエナのポートフォリオ、公式Xの投稿の画像を、縮小・WebP 変換して使っています。
 - 組み合わせて作った画像（描き足し・背景の切り抜きはしていません）
-  - `assets/img/logo/logo-h-120.webp`：いただいたロゴの積み木と、横書きの文字ロゴを横に並べたもの（ヘッダー用）
+  - `assets/img/logo/logo-h-120.webp`・`logo-h-240.webp`：いただいたロゴの積み木と、横書きの文字ロゴ（小さめ・薄いドロップシャドウ）を横に並べたもの（ヘッダー用）
   - `assets/img/works/new/kv.webp`・`assets/img/pickup/new.webp`：積み木の床＋はてなマークの積み木（開発中の新作用）
   - `assets/img/ogp.jpg`・`assets/img/news/2026-10-14-renewal.webp`：積み木の床＋ロゴ＋看板娘3人（SNS でシェアされたときの画像）
   - `assets/img/news/prj-rain.webp`：正方形の画像の左右を、同じ画像のぼかしで埋めたもの
@@ -179,5 +183,6 @@ tools/
 ## 確認してほしいところ
 
 - 『トラップス』のクマチの紹介文は、トラップス公式サイトの紹介文（仮）をもとにしています。
-- 「36,000DL突破」「ラジオ登録者1,000人突破」は、ポートフォリオ・公式Xの情報をもとにしています。数字が変わったら `index.html`（ABOUT）と `assets/data/works.js`（badge）を更新してください。
+- 「36,000DL突破」「クレアクラン放送局 登録者1,000人突破」は、ポートフォリオ・YouTube の情報をもとにしています。数字が変わったら `assets/data/works.js`（badge）・`assets/data/pickup.js`・`index.html`（CONTENTS のバッジ）を更新してください。
+- 実況動画は、カミエナの YouTube の再生リスト「【実況まとめ】ガーデンハント／走れ！クレアちゃん」から作っています。
 - 旧サイトの「App Store」リンクは現在ページが無くなっているため、「スマートフォン版は現在公開停止中」と表記しています。

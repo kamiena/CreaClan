@@ -3,7 +3,7 @@
 
    ▼ 新しい作品を追加するときは、下の CC_WORKS に { … } を1つ足してください。
      トップページの「WORKS」に自動で表示されます（カードを押すと、その作品の公式サイト site が開きます）。
-     並び順は、この配列の順番のままです（上にあるものほど先に表示）。
+     並び順は、この配列の順番のままです（リリースした順。新しい作品は下に足す）。
 
    ▼ secret: true にすると、作品名や情報をふせた「？？？」のカードになります（公式サイトのボタンも出ません）。
    ▼ status（状態）の種類
@@ -14,6 +14,43 @@
    ========================================================================== */
 
 window.CC_WORKS = [
+  {
+    id: "crea-run",
+    title: "走れ！クレアちゃん",
+    titleEn: "Crea Run!",
+    status: "free",
+    statusLabel: "無料配信中",
+    color: "pink",
+    badge: "36,000DL突破！",
+    genre: "ラン＆ジャンプ＆クラフトのアクションゲーム",
+    catch: "走って、飛んで、積み木を集めて… 集めた積み木とレシピを使って、乗り物をクラフト！",
+    description: "乗り物に乗っている間は獲得スコアがUPして、敵も障害物も倒せるように…！ たくさんクラフトして、ステージを駆け抜け、一気にスコアを稼ごう！ クレアクランの1作品目です。",
+    image: "assets/img/works/crea-run/kv.webp",
+    imageAlt: "『走れ！クレアちゃん』キービジュアル。積み木のロケットにまたがるクレアちゃん",
+    logo: "assets/img/works/crea-run/logo.webp",
+    site: "https://kamiena.github.io/CreaRun/",
+    tags: ["積み木クラフト"],
+    specs: [
+      ["ジャンル", "ラン＆ジャンプ＆クラフトのアクションゲーム"],
+      ["プラットフォーム", "Steam（Windows）"],
+      ["配信日", "2023年8月22日（Steam版）"],
+      ["価格", "無料"],
+      ["プレイ人数", "1人"],
+      ["対応言語", "日本語"],
+      ["開発・販売", "クレアクラン（CREA CLAN）／カミエナ"],
+    ],
+    note: "スマートフォン版（App Store／Google Play）は現在公開停止中です。",
+    links: [
+      { type: "steam", label: "Steamストア", url: "https://store.steampowered.com/app/2547610/" },
+      { type: "youtube", label: "紹介映像", url: "https://youtu.be/AwsuFbgcJMI" },
+    ],
+    screenshots: [
+      "assets/img/works/crea-run/ss-1.webp",
+      "assets/img/works/crea-run/ss-2.webp",
+      "assets/img/works/crea-run/ss-3.webp",
+    ],
+  },
+
   {
     id: "garden-hunt",
     title: "ガーデンハント",
@@ -27,8 +64,6 @@ window.CC_WORKS = [
     image: "assets/img/works/garden-hunt/kv.webp",
     imageAlt: "『ガーデンハント』キービジュアル。黄色いコートを着たナメツムリの少女メイナと、青いスライム、紫のスライム",
     logo: "assets/img/works/garden-hunt/logo.webp",
-    chara: "assets/img/chara/meina.webp",
-    charaName: "メイナ",
     site: "https://kamiena.github.io/GardenHunt/",
     tags: ["9言語対応", "日本語フルボイス"],
     specs: [
@@ -67,8 +102,6 @@ window.CC_WORKS = [
     image: "assets/img/works/traps/kv.webp",
     imageAlt: "『トラップス』キービジュアル。クマの着ぐるみを着たクマチと、ハチミツのツボ",
     logo: "assets/img/works/traps/logo.webp",
-    chara: "assets/img/chara/kumachi.webp",
-    charaName: "クマチ",
     site: "https://kamiena.github.io/Traps/",
     tags: ["アナログゲーム", "心理戦"],
     specs: [
@@ -88,45 +121,6 @@ window.CC_WORKS = [
       "assets/img/works/traps/card-minus2.webp",
     ],
     screenshotsSquare: true,
-  },
-
-  {
-    id: "crea-run",
-    title: "走れ！クレアちゃん",
-    titleEn: "Crea Run!",
-    status: "free",
-    statusLabel: "無料配信中",
-    color: "pink",
-    badge: "36,000DL突破！",
-    genre: "ラン＆ジャンプ＆クラフトのアクションゲーム",
-    catch: "走って、飛んで、積み木を集めて… 集めた積み木とレシピを使って、乗り物をクラフト！",
-    description: "乗り物に乗っている間は獲得スコアがUPして、敵も障害物も倒せるように…！ たくさんクラフトして、ステージを駆け抜け、一気にスコアを稼ごう！ クレアクランの1作品目です。",
-    image: "assets/img/works/crea-run/kv.webp",
-    imageAlt: "『走れ！クレアちゃん』キービジュアル。積み木のロケットにまたがるクレアちゃん",
-    logo: "assets/img/works/crea-run/logo.webp",
-    chara: "assets/img/chara/crea.webp",
-    charaName: "クレア",
-    site: "https://kamiena.github.io/CreaRun/",
-    tags: ["積み木クラフト"],
-    specs: [
-      ["ジャンル", "ラン＆ジャンプ＆クラフトのアクションゲーム"],
-      ["プラットフォーム", "Steam（Windows）"],
-      ["配信日", "2023年8月22日（Steam版）"],
-      ["価格", "無料"],
-      ["プレイ人数", "1人"],
-      ["対応言語", "日本語"],
-      ["開発・販売", "クレアクラン（CREA CLAN）／カミエナ"],
-    ],
-    note: "スマートフォン版（App Store／Google Play）は現在公開停止中です。",
-    links: [
-      { type: "steam", label: "Steamストア", url: "https://store.steampowered.com/app/2547610/" },
-      { type: "youtube", label: "紹介映像", url: "https://youtu.be/AwsuFbgcJMI" },
-    ],
-    screenshots: [
-      "assets/img/works/crea-run/ss-1.webp",
-      "assets/img/works/crea-run/ss-2.webp",
-      "assets/img/works/crea-run/ss-3.webp",
-    ],
   },
 
   {

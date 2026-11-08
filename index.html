@@ -21,31 +21,33 @@
   <link rel="icon" href="assets/img/logo/favicon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="assets/css/fonts.css?v=20261108b" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="assets/css/fonts.css?v=20261108b"></noscript>
-  <link rel="stylesheet" href="assets/css/style.css?v=20261108b">
+  <link rel="preload" href="assets/css/fonts.css?v=20261109" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/fonts.css?v=20261109"></noscript>
+  <link rel="stylesheet" href="assets/css/style.css?v=20261109">
   <script>document.documentElement.classList.add('js');</script>
   <script src="assets/data/news.js" defer></script>
   <script src="assets/data/works.js" defer></script>
   <script src="assets/data/goods.js" defer></script>
   <script src="assets/data/pickup.js" defer></script>
-  <script src="assets/js/main.js?v=20261108b" defer></script>
+  <script src="assets/data/media.js" defer></script>
+  <script src="assets/js/main.js?v=20261109" defer></script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "クレアクラン", "alternateName": ["CREA CLAN", "Crea Clan", "クレアクラン（CREA CLAN）"], "description": "「kawaii」をテーマに、カラフルポップでクセになるゲームを作るインディーゲームサークル。", "url": "https://kamiena.github.io/CreaClan/", "logo": "https://kamiena.github.io/CreaClan/assets/img/logo/logo-1200.png", "foundingDate": "2020", "founder": {"@type": "Person", "name": "カミエナ", "alternateName": "KamiEna", "url": "https://kamiena.github.io/portfolio/"}, "sameAs": ["https://x.com/creaclan_game", "https://www.youtube.com/@CreaClanOfficial", "https://creaclan.booth.pm/"]}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "クレアクラン（CREA CLAN）公式サイト", "alternateName": ["CREA CLAN", "クレアクラン"], "url": "https://kamiena.github.io/CreaClan/"}</script>
 </head>
 <body>
-<script src="assets/js/icons.js?v=20261108b"></script>
+<script src="assets/js/icons.js?v=20261109"></script>
 <a class="skip-link" href="#main">本文へスキップ</a>
 <header class="site-header" id="top">
   <div class="site-header__bar">
-    <a class="site-logo" href="#top"><img src="assets/img/logo/logo-h-120.webp" width="666" height="120" alt="クレアクラン CREA CLAN（トップページへ）"></a>
+    <a class="site-logo" href="#top"><img src="assets/img/logo/logo-h-120.webp" srcset="assets/img/logo/logo-h-120.webp 1x, assets/img/logo/logo-h-240.webp 2x" width="528" height="120" alt="クレアクラン CREA CLAN（トップページへ）"></a>
     <div class="gnav" id="gnav">
       <nav aria-label="メインメニュー">
         <ul class="gnav__list">
           <li><a class="gnav__link c-orange" href="#news"><span class="gnav__shape shape-square" aria-hidden="true"></span><span class="gnav__en">NEWS</span><span class="gnav__ja">ニュース</span></a></li>
           <li><a class="gnav__link c-pink" href="#works"><span class="gnav__shape shape-tri" aria-hidden="true"></span><span class="gnav__en">WORKS</span><span class="gnav__ja">作品</span></a></li>
-          <li><a class="gnav__link c-sky" href="#about"><span class="gnav__shape shape-circle" aria-hidden="true"></span><span class="gnav__en">ABOUT</span><span class="gnav__ja">クレアクランとは</span></a></li>
-          <li><a class="gnav__link c-mint" href="#contents"><span class="gnav__shape shape-arch" aria-hidden="true"></span><span class="gnav__en">CONTENTS</span><span class="gnav__ja">ラジオ・動画</span></a></li>
+          <li><a class="gnav__link c-sky" href="#media"><span class="gnav__shape shape-circle" aria-hidden="true"></span><span class="gnav__en">MEDIA</span><span class="gnav__ja">メディア</span></a></li>
+          <li><a class="gnav__link c-mint" href="#about"><span class="gnav__shape shape-arch" aria-hidden="true"></span><span class="gnav__en">ABOUT</span><span class="gnav__ja">クレアクランとは</span></a></li>
+          <li><a class="gnav__link c-orange" href="#contents"><span class="gnav__shape shape-square" aria-hidden="true"></span><span class="gnav__en">CONTENTS</span><span class="gnav__ja">YouTube・SNS</span></a></li>
           <li><a class="gnav__link c-yellow" href="#goods"><span class="gnav__shape shape-half" aria-hidden="true"></span><span class="gnav__en">GOODS</span><span class="gnav__ja">グッズ</span></a></li>
         </ul>
       </nav>
@@ -74,15 +76,16 @@
       <span class="blk-shape is-arch c-orange" style="--x:12%;--y:36%;--s:38px;--r:6deg;--d:-4s"></span>
       <span class="blk-shape is-cube c-mint" style="--x:84%;--y:30%;--s:30px;--r:18deg;--d:-5s"></span>
     </div>
-    <p class="hero__catch">「<b>kawaii</b>」をテーマに、カラフルポップで<span class="nowrap">クセになるゲームを作る</span><span class="nowrap">インディーゲームサークルです！</span></p>
     <div class="pickup" data-pickup aria-roledescription="カルーセル" aria-label="ピックアップ"></div>
-    <img class="hero__chara hero__chara--crea" src="assets/img/chara/crea.webp" alt="" width="365" height="400">
-    <img class="hero__chara hero__chara--kumachi" src="assets/img/chara/kumachi.webp" alt="" width="400" height="365">
+    <span class="hero__chara hero__chara--crea"><img src="assets/img/chara/crea.webp" alt="" width="365" height="400"></span>
+    <span class="hero__chara hero__chara--kumachi"><img src="assets/img/chara/kumachi.webp" alt="" width="400" height="365"></span>
+    <span class="hero__chara hero__chara--meina"><img src="assets/img/chara/meina.webp" alt="" width="400" height="376"></span>
     <nav class="jump" aria-label="このページの中の場所">
       <a class="c-orange" href="#news">ニュース</a>
       <a class="c-pink" href="#works">作品</a>
-      <a class="c-sky" href="#about">クレアクランとは</a>
-      <a class="c-mint" href="#contents">ラジオ・動画</a>
+      <a class="c-sky" href="#media">メディア</a>
+      <a class="c-mint" href="#about">クレアクランとは</a>
+      <a class="c-orange" href="#contents">ラジオ・SNS</a>
       <a class="c-yellow" href="#goods">グッズ</a>
     </nav>
     <noscript><p class="noscript">このサイトは JavaScript を使っています。ニュースや作品の一覧を見るには、JavaScript を有効にしてください。</p></noscript>
@@ -107,6 +110,29 @@
         <p class="sec-lead">作品名や画像を押すと、それぞれの作品の公式サイトが開きます。くわしい情報やスクリーンショットは、各公式サイトでご覧ください♪</p>
       </div>
       <div class="works-grid" data-works></div>
+    </div>
+  </section>
+
+  <!-- ===== メディア掲載・実況 ===== -->
+  <section class="sec" id="media" aria-labelledby="media-title">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="sec-title" id="media-title"><span class="sec-title__en" data-color-offset="2">MEDIA</span><span class="sec-title__ja">メディア掲載・実況動画</span></h2>
+        <p class="sec-lead">クレアクランの作品は、テレビやWEBメディア、たくさんの実況者さんに取り上げていただいています。ありがとうございます♪</p>
+      </div>
+      <ul class="media-stats reveal" data-media="stats" aria-label="これまでに取り上げていただいた数"></ul>
+
+      <h3 class="sub-title"><span>テレビ</span></h3>
+      <ul class="tv-grid" data-media="tv"></ul>
+
+      <h3 class="sub-title"><span>WEB記事</span></h3>
+      <ol class="press-list" id="press-list" data-media="articles"></ol>
+      <div class="list-more" data-more-for="press-list"></div>
+
+      <h3 class="sub-title"><span>実況・プレイ動画</span></h3>
+      <ul class="lp-grid" id="lp-list" data-media="videos"></ul>
+      <div class="list-more" data-more-for="lp-list"></div>
+      <div class="btn-row btn-row--center lp-playlists" data-playlists></div>
     </div>
   </section>
 
@@ -137,12 +163,6 @@
             <li class="concept c-mint"><span class="concept__icon"><svg class="icon" aria-hidden="true"><use href="#i-pad"></use></svg></span><b>クセになる遊び</b><span>ひと癖ある、何度も遊びたくなる手応え</span></li>
             <li class="concept c-sky"><span class="concept__icon"><svg class="icon" aria-hidden="true"><use href="#i-users"></use></svg></span><b>だれでも楽しい</b><span>年齢・性別を問わず、幅広いみなさんに</span></li>
           </ul>
-          <div class="about-facts">
-            <div class="about-fact c-orange"><b>2020</b><span>結成</span></div>
-            <div class="about-fact c-pink"><b>36,000</b><span>DL突破<br>（走れ！クレアちゃん）</span></div>
-            <div class="about-fact c-mint"><b>9</b><span>言語対応<br>（ガーデンハント）</span></div>
-            <div class="about-fact c-sky"><b>1,000</b><span>人突破<br>（ラジオの登録者）</span></div>
-          </div>
         </div>
       </div>
 
@@ -169,7 +189,7 @@
           <span class="chara-card__body">
             <span class="chara-card__name">クマチ</span>
             <span class="chara-card__work">『トラップス』<svg class="icon" aria-hidden="true"><use href="#i-ext"></use></svg></span>
-            <span class="chara-card__text">森からやってきた、いたずら好きの女の子。お気に入りのクマの着ぐるみを着て、今日も村へいたずらをしにやってくる！</span>
+            <span class="chara-card__text">森からやってきた、いたずら好きの女の子。あま〜いハチミツには、どうしても抗えない…！ 苦手なのは、スズやドラの大きな音。</span>
           </span>
         </a>
       </div>
@@ -204,7 +224,7 @@
               <li class="tl-item"><time>2026.10</time><p>第9回 全国エンタメまつり（ぜんため）に初出展<small>メイナのぬいぐるみの販売をスタート。開発中の新作のシークレット試遊も／公式ホームページをリニューアル</small></p></li>
               <li class="tl-item"><time>2026.09</time><p>『ガーデンハント』メイナのぬいぐるみが完成</p></li>
               <li class="tl-item"><time>2026.08</time><p>コミックマーケット108 に出展<small>『ガーデンハント』パッケージ版と、メイナ・クレア・クマチの新作ちびキャラアクスタを頒布</small></p></li>
-              <li class="tl-item"><time>2026.07</time><p>ゲーム実況・動画配信ガイドラインを公開<small>新作アナログゲーム『トラップス』のキービジュアルを公開／BSフジ『界隈ほーる』に代表カミエナが出演／ラジオ「クレアクランカフェ」のチャンネル登録者が1,000人を突破</small></p></li>
+              <li class="tl-item"><time>2026.07</time><p>ゲーム実況・動画配信ガイドラインを公開<small>新作アナログゲーム『トラップス』のキービジュアルを公開／BSフジ『界隈ほーる』に代表カミエナが出演／YouTube「クレアクラン放送局」のチャンネル登録者が1,000人を突破</small></p></li>
               <li class="tl-item"><time>2026.05</time><p>東京ゲームダンジョン12 に出展<small>BSフジ『界隈ほーる』で『ガーデンハント』が紹介される／渋谷の「404 Not Found」の常設展示「404ゲームセンター」で『ガーデンハント』を展示／メイナのぬいぐるみ化が決定</small></p></li>
               <li class="tl-item"><time>2026.02</time><p>SHIBUYA GAMES WEEK 2026 に『ガーデンハント』を出展</p></li>
               <li class="tl-item"><time>2026.01</time><p>『ガーデンハント』Steam で発売！<small>9言語対応・日本語フルボイス</small></p></li>
@@ -256,29 +276,33 @@
   <section class="sec" id="contents" aria-labelledby="contents-title">
     <div class="container">
       <div class="sec-head">
-        <h2 class="sec-title" id="contents-title"><span class="sec-title__en" data-color-offset="3">CONTENTS</span><span class="sec-title__ja">ラジオ・動画・SNS</span></h2>
+        <h2 class="sec-title" id="contents-title"><span class="sec-title__en" data-color-offset="3">CONTENTS</span><span class="sec-title__ja">YouTube・SNS・ショップ</span></h2>
       </div>
       <div class="contents-grid">
         <div class="card content-card c-sky reveal">
-          <div class="content-card__visual is-contain"><img src="assets/img/contents/radio-cafe.webp" alt="ラジオ「クレアクランカフェ」ロゴ" width="480" height="480" loading="lazy"></div>
+          <div class="content-card__visual"><img src="assets/img/contents/radio-channel.webp" alt="ラジオ「クレアクランカフェ」ロゴ" width="960" height="540" loading="lazy"><span class="content-card__badge">登録者 1,000人突破！</span></div>
           <div class="content-card__body">
-            <p class="content-card__kicker">RADIO</p>
-            <h3 class="content-card__title">ラジオ「クレアクランカフェ」</h3>
-            <p class="content-card__text">ここはクリエイターが集まる喫茶店…。様々なジャンルのクリエイターをゲストにお呼びして、こだわりや考え方を質問形式で深ぼっていくトークラジオです。</p>
+            <p class="content-card__kicker">YouTube</p>
+            <h3 class="content-card__title">クレアクラン放送局</h3>
+            <p class="content-card__text">クリエイティブ作業中に聞き流せるクリエイターラジオ「クレアクランカフェ」などを配信中！ 様々なジャンルのクリエイターをゲストにお呼びして、こだわりや考え方を深ぼっていきます。</p>
             <div class="btn-row">
-              <a class="btn btn--sm btn--yt" href="https://www.youtube.com/@CreaClanOfficial" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-yt"></use></svg>YouTube</a>
+              <a class="btn btn--sm btn--yt" href="https://www.youtube.com/@CreaClanOfficial" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-yt"></use></svg>チャンネル</a>
+              <a class="btn btn--sm btn--white" href="https://www.youtube.com/playlist?list=PLDVInEZy89Hqt3d5OXPUA4rKjF3AE-hTV" target="_blank" rel="noopener">クレアクランカフェ<svg class="icon icon--after" aria-hidden="true"><use href="#i-ext"></use></svg></a>
               <a class="btn btn--sm btn--spotify" href="https://open.spotify.com/show/1z4FqQ5kkyGWxAdeQIVdQV" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-spotify"></use></svg>Spotify</a>
             </div>
           </div>
         </div>
         <div class="card content-card c-mint reveal" style="--delay:.06s">
-          <div class="content-card__visual"><img src="assets/img/contents/voicecomic.webp" alt="『ガーデンハント』ボイスコミック第1話" width="640" height="360" loading="lazy"></div>
+          <div class="content-card__visual is-contain is-round"><img src="assets/img/creators/kamiena-icon.webp" alt="代表カミエナのアイコン" width="400" height="400" loading="lazy"></div>
           <div class="content-card__body">
-            <p class="content-card__kicker">MOVIE</p>
-            <h3 class="content-card__title">作品PV・ボイスコミック</h3>
-            <p class="content-card__text">『ガーデンハント』のPVや、マンガ×フルボイスのボイスコミックなど、作品の映像を YouTube で公開中です！</p>
+            <p class="content-card__kicker">KamiEna</p>
+            <h3 class="content-card__title">代表カミエナの発信</h3>
+            <p class="content-card__text">開発中のゲームのこと、制作のウラ話、旅先で見つけたゲームづくりのヒントなどを発信中。YouTube では、作品PV・ボイスコミックや、実況していただいた動画のまとめも公開しています♪</p>
             <div class="btn-row">
-              <a class="btn btn--sm btn--yt" href="https://www.youtube.com/@KamiEna_Game" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-yt"></use></svg>YouTube で見る</a>
+              <a class="btn btn--sm btn--x" href="https://x.com/KamiEna_Game" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>X</a>
+              <a class="btn btn--sm btn--yt" href="https://www.youtube.com/@KamiEna_Game" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-yt"></use></svg>YouTube</a>
+              <a class="btn btn--sm btn--white" href="https://note.com/kamiena_game" target="_blank" rel="noopener">note<svg class="icon icon--after" aria-hidden="true"><use href="#i-ext"></use></svg></a>
+              <a class="btn btn--sm btn--white" href="https://kamiena.github.io/portfolio/" target="_blank" rel="noopener">ポートフォリオ<svg class="icon icon--after" aria-hidden="true"><use href="#i-ext"></use></svg></a>
             </div>
           </div>
         </div>
@@ -287,21 +311,20 @@
           <div class="content-card__body">
             <p class="content-card__kicker">SHOP</p>
             <h3 class="content-card__title">公式BOOTHショップ</h3>
-            <p class="content-card__text">コミックマーケットなどのイベントで頒布したゲームやグッズなどを販売しています～ ぜひ見ていってください♪</p>
+            <p class="content-card__text">コミックマーケットなどのイベントで頒布したゲームやグッズの一部を販売しています～ ぜひ見ていってください♪</p>
             <div class="btn-row">
               <a class="btn btn--sm" href="https://creaclan.booth.pm/" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-bag"></use></svg>BOOTH を見る</a>
             </div>
           </div>
         </div>
         <div class="card content-card c-orange reveal" style="--delay:.18s">
-          <div class="content-card__visual is-contain is-round"><img src="assets/img/contents/x-avatar.webp" alt="クレアクラン公式Xのアイコン（クレア）" width="400" height="400" loading="lazy"></div>
+          <div class="content-card__visual is-top"><img src="assets/img/contents/crea-poster.webp" alt="クレアクランの看板娘クレア" width="520" height="860" loading="lazy"></div>
           <div class="content-card__body">
             <p class="content-card__kicker">X（旧Twitter）</p>
             <h3 class="content-card__title">公式X @creaclan_game</h3>
-            <p class="content-card__text">イベント出展などのお知らせを発信しています。開発中の様子や最新情報は、代表カミエナ（@KamiEna_Game）のアカウントでも発信中♪</p>
+            <p class="content-card__text">イベント出展などのお知らせを発信しています。最新情報は、代表カミエナのアカウントでも発信中♪</p>
             <div class="btn-row">
               <a class="btn btn--sm btn--x" href="https://x.com/creaclan_game" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>フォローする</a>
-              <a class="btn btn--sm btn--white" href="https://x.com/KamiEna_Game" target="_blank" rel="noopener">@KamiEna_Game</a>
             </div>
           </div>
         </div>
@@ -400,9 +423,10 @@
         <nav class="footer-nav" aria-label="サイト内リンク">
           <a class="c-orange" href="#news">ニュース</a>
           <a class="c-pink" href="#works">作品</a>
+          <a class="c-sky" href="#media">メディア掲載・実況</a>
           <a class="c-sky" href="#about">クレアクランとは</a>
           <a class="c-yellow" href="#history">これまでのあゆみ</a>
-          <a class="c-mint" href="#contents">ラジオ・動画・SNS</a>
+          <a class="c-mint" href="#contents">YouTube・SNS</a>
           <a class="c-pink" href="#goods">グッズ</a>
           <a class="c-sky" href="#guideline">配信ガイドライン</a>
         </nav>

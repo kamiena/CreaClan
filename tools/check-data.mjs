@@ -98,6 +98,26 @@ CC_GOODS.forEach((g, i) => {
   if (!g.image || !exists(g.image)) err(where, `画像 ${g.image} が見つかりません`);
 });
 
+// メディア掲載・実況動画
+const { CC_MEDIA = {} } = load('assets/data/media.js');
+(CC_MEDIA.tv || []).forEach((t, i) => {
+  const where = `media.js tv #${i + 1}`;
+  if (!t.title || !t.url) err(where, 'title か url がありません');
+  if (t.image && !exists(t.image)) err(where, `画像 ${t.image} が見つかりません`);
+  if (t.work && !workIds.has(t.work)) err(where, `work "${t.work}" は works.js にありません`);
+});
+(CC_MEDIA.articles || []).forEach((a, i) => {
+  const where = `media.js articles #${i + 1}`;
+  if (!a.media || !a.title || !a.url) err(where, 'media・title・url のどれかがありません');
+  if (a.date && !isDate(a.date)) err(where, `date "${a.date}" は YYYY-MM-DD の形にしてください`);
+  if (a.work && !workIds.has(a.work)) err(where, `work "${a.work}" は works.js にありません`);
+});
+(CC_MEDIA.videos || []).forEach((v, i) => {
+  const where = `media.js videos #${i + 1}`;
+  if (!/^[\w-]{11}$/.test(v.id || '')) err(where, `YouTube の動画ID "${v.id}" が正しくありません`);
+  if (v.work && !workIds.has(v.work)) err(where, `work "${v.work}" は works.js にありません`);
+});
+
 // ピックアップ
 CC_PICKUP.forEach((p, i) => {
   const where = `pickup.js #${i + 1}`;
@@ -143,5 +163,5 @@ const sitemapPath = path.join(ROOT, 'sitemap.xml');
 const before = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, 'utf8') : '';
 if (before !== xml) fs.writeFileSync(sitemapPath, xml);
 
-console.log(`OK！ ニュース ${CC_NEWS.length} 件・作品 ${CC_WORKS.length} 件・グッズ ${CC_GOODS.length} 件・ピックアップ ${CC_PICKUP.length} 件、ページ ${pages.length} 枚を確認しました。` +
+console.log(`OK！ ニュース ${CC_NEWS.length} 件・メディア ${(CC_MEDIA.articles || []).length + (CC_MEDIA.tv || []).length} 件・実況 ${(CC_MEDIA.videos || []).length} 件・作品 ${CC_WORKS.length} 件・グッズ ${CC_GOODS.length} 件・ピックアップ ${CC_PICKUP.length} 件、ページ ${pages.length} 枚を確認しました。` +
   (before !== xml ? '（sitemap.xml を更新しました）' : ''));

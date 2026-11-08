@@ -11,6 +11,7 @@
   var GOODS = window.CC_GOODS || [];
   var GOODS_STATUS = window.CC_GOODS_STATUS || {};
   var PICKUP = window.CC_PICKUP || [];
+  var MEDIA = window.CC_MEDIA || {};
   var NEWS = (window.CC_NEWS || []).slice().sort(function (a, b) {
     return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
   });
@@ -257,7 +258,6 @@
     return '<article class="card work-card c-' + esc(w.color) + (w.secret ? ' is-secret' : '') + ' reveal" style="--delay:' + (i % 2 * 0.08) + 's">' +
       (w.site ? '<a class="work-card__visual" ' + linkAttrs(w.site) + ' tabindex="-1" aria-hidden="true">' + visual + '</a>'
         : '<div class="work-card__visual">' + visual + '</div>') +
-      (w.chara ? '<img class="work-card__chara" src="' + esc(w.chara) + '" alt="" loading="lazy" decoding="async">' : '') +
       '<div class="work-card__body">' +
       '<p class="work-card__genre">' + esc(w.genre) + '</p>' +
       '<h3 class="work-card__title">' + (w.site ? '<a ' + linkAttrs(w.site) + '>' + esc(w.title) + '<span class="visually-hidden">（公式サイトを開く）</span></a>' : '<span>' + esc(w.title) + '</span>') +
@@ -270,6 +270,78 @@
       '</div></article>';
   }
   function renderWorks(el) { el.innerHTML = WORKS.map(workCard).join(''); }
+
+  /* ---------- メディア掲載・実況動画 ---------- */
+  function workTag(id) {
+    var w = workById(id);
+    return w ? '<span class="tag c-' + esc(w.color) + '">' + esc(w.title) + '</span>' : '';
+  }
+  // はじめは first 件だけ見せて、残りは「もっと見る」で開く
+  function moreList(el, total, first, label) {
+    var rest = total - first;
+    var box = document.querySelector('[data-more-for="' + el.id + '"]');
+    if (rest <= 0 || !box) return;
+    var closed = label + '（あと' + rest + '件）';
+    box.innerHTML = '<button class="btn btn--white" type="button" aria-expanded="false" aria-controls="' + esc(el.id) + '"><span>' + esc(closed) + '</span>' + icon('down', 'icon--after') + '</button>';
+    var btn = $('button', box), txt = $('span', btn);
+    btn.addEventListener('click', function () {
+      var on = btn.getAttribute('aria-expanded') !== 'true';
+      $$('.is-extra', el).forEach(function (x) { x.hidden = !on; });
+      btn.setAttribute('aria-expanded', String(on));
+      txt.textContent = on ? '閉じる' : closed;
+      if (on) { var f = $('.is-extra a', el); if (f) f.focus({ preventScroll: true }); }
+      else el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
+  function renderMedia(el) {
+    var kind = el.getAttribute('data-media');
+    if (kind === 'stats') {
+      var stats = [
+        ['テレビ出演', (MEDIA.tv || []).length, '本', 'c-pink', 'video'],
+        ['WEB記事', (MEDIA.articles || []).length, '本', 'c-sky', 'news'],
+        ['実況・プレイ動画', (MEDIA.videos || []).length, '本以上', 'c-mint', 'play']
+      ];
+      el.innerHTML = stats.map(function (s) {
+        return '<li class="media-stat ' + s[3] + '"><span class="media-stat__icon">' + icon(s[4]) + '</span><b>' + s[1] + '<small>' + s[2] + '</small></b><span>' + s[0] + '</span></li>';
+      }).join('');
+      return;
+    }
+    if (kind === 'tv') {
+      el.innerHTML = (MEDIA.tv || []).map(function (t, i) {
+        return '<li class="reveal" style="--delay:' + (i * 0.06) + 's"><a class="card tv-card c-pink" ' + linkAttrs(t.url) + '>' +
+          '<span class="tv-card__img"><img src="' + esc(t.image) + '" alt="" loading="lazy" decoding="async"><span class="play-mark">' + icon('play') + '</span></span>' +
+          '<span class="tv-card__body"><span class="news-meta"><span class="tag c-pink">' + esc(t.channel) + '</span><time class="date">' + fmtDate(t.date) + '</time></span>' +
+          '<span class="tv-card__title">' + esc(t.title) + '</span><span class="tv-card__text">' + esc(t.text) + '</span></span></a></li>';
+      }).join('');
+      return;
+    }
+    if (kind === 'articles') {
+      var FIRST_A = 6, arts = MEDIA.articles || [];
+      el.innerHTML = arts.map(function (a, i) {
+        return '<li' + (i >= FIRST_A ? ' class="is-extra" hidden' : '') + '><a class="press-item" ' + linkAttrs(a.url) + '>' +
+          '<time class="date">' + (a.date ? fmtDate(a.date) : '―') + '</time>' +
+          '<span class="press-item__main"><span class="press-item__media">' + esc(a.media) + '</span><span class="press-item__title">' + esc(a.title) + '</span></span>' +
+          '<span class="press-item__tag">' + workTag(a.work) + '</span>' + icon('ext', 'press-item__ext') + '</a></li>';
+      }).join('');
+      moreList(el, arts.length, FIRST_A, 'もっと見る');
+      return;
+    }
+    if (kind === 'videos') {
+      var FIRST_V = 8, vids = MEDIA.videos || [];
+      el.innerHTML = vids.map(function (v, i) {
+        var url = 'https://www.youtube.com/watch?v=' + encodeURIComponent(v.id);
+        return '<li' + (i >= FIRST_V ? ' class="is-extra" hidden' : '') + '><a class="lp-card" ' + linkAttrs(url) + '>' +
+          '<span class="lp-card__img"><img src="https://i.ytimg.com/vi/' + esc(v.id) + '/mqdefault.jpg" alt="" loading="lazy" decoding="async" width="320" height="180"><span class="play-mark">' + icon('play') + '</span></span>' +
+          '<span class="lp-card__title">' + esc(v.title) + '</span>' +
+          '<span class="lp-card__meta"><span class="lp-card__ch">' + esc(v.channel) + '</span>' + workTag(v.work) + '</span></a></li>';
+      }).join('');
+      moreList(el, vids.length, FIRST_V, 'もっと見る');
+      var pl = document.querySelector('[data-playlists]');
+      if (pl) pl.innerHTML = (MEDIA.playlists || []).map(function (p) {
+        return '<a class="btn btn--sm btn--yt" ' + linkAttrs(p.url) + '>' + icon('yt') + esc(p.label) + '</a>';
+      }).join('');
+    }
+  }
 
   /* ---------- グッズ ---------- */
   function goodsCard(g, i) {
@@ -514,6 +586,7 @@
     $$('[data-news]').forEach(renderNews);
     $$('[data-works]').forEach(renderWorks);
     $$('[data-goods]').forEach(renderGoods);
+    $$('[data-media]').forEach(renderMedia);
     $$('.sec-title__en').forEach(function (el, i) { buildBlocks(el, i % COLORS.length); });
     initMenu();
     initToTop();
