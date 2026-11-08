@@ -17,6 +17,11 @@ window.CC_MEDIA = {
       text: "代表カミエナがインディーゲームクリエイターとして出演。スタジオでは近藤春菜さんが『ガーデンハント』をプレイしてくださいました！",
       image: "assets/img/pickup/kaiwai-hall.webp", url: "https://www.youtube.com/watch?v=DnmBOhPELe0&t=199s", work: "garden-hunt",
     },
+    {
+      date: "2026-07-07", channel: "BSフジ", title: "界隈ほーる 〜偏愛の穴に落ちてみた〜 #10「インディーゲーム界隈」第2弾",
+      text: "BitSummit を取材したインディーゲーム特集の第2弾に、代表カミエナが出演しました。",
+      image: "https://i.ytimg.com/vi/aq1FHu8H-Mg/hqdefault.jpg", url: "https://www.youtube.com/watch?v=aq1FHu8H-Mg",
+    },
   ],
 
   articles: [
