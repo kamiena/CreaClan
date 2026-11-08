@@ -1,7 +1,7 @@
 /* ==========================================================================
    クレアクラン 公式サイト
    - ニュース・作品・グッズ・ピックアップは assets/data/*.js のデータから自動で表示します
-   - メニュー、スライダー、スクロール演出、画像の拡大表示など
+   - メニュー（ページ内の各場所へスクロール）、スライダー、ニュースの開閉、スクロール演出など
    ========================================================================== */
 (function () {
   'use strict';
@@ -15,7 +15,6 @@
     return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
   });
   var COLORS = ['orange', 'pink', 'sky', 'mint', 'yellow'];
-  var SITE_NAME = 'クレアクラン（CREA CLAN）公式サイト';
   var NEW_DAYS = 30;
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -79,7 +78,8 @@
       if (!line) { flushPara(); flushList(); return; }
       if ((m = line.match(/^(#{2,3})\s+(.*)$/))) {
         flushPara(); flushList();
-        var tag = m[1].length === 2 ? 'h2' : 'h3';
+        // ニュースのタイトルが h3 なので、本文の見出しは h4 / h5 にする
+        var tag = m[1].length === 2 ? 'h4' : 'h5';
         out.push('<' + tag + '>' + inline(m[2]) + '</' + tag + '>');
         return;
       }
@@ -96,27 +96,7 @@
     flushPara(); flushList();
     return out.join('');
   }
-  function plain(src) {
-    return String(src || '')
-      .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
-      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
-      .replace(/^#{2,3}\s+/gm, '')
-      .replace(/\*\*/g, '')
-      .replace(/^-\s+/gm, '')
-      .replace(/▼/g, '')
-      .replace(/\s+/g, ' ')
-      .trim();
-  }
-  function excerpt(item, n) {
-    var s = item.summary || plain(item.body);
-    return s.length > n ? s.slice(0, n) + '…' : s;
-  }
-
-  /* ---------- ニュースの部品 ---------- */
-  function newsHref(item) {
-    if (!item.body && item.url) return item.url;
-    return 'news.html?id=' + encodeURIComponent(item.id);
-  }
+  /* ---------- ニュース（トップページの中で開いて読む） ---------- */
   function newsThumb(item) {
     var c = cat(item.category);
     if (item.image) {
@@ -130,190 +110,134 @@
       '<span class="tag c-' + c.color + '">' + esc(c.label) + '</span>' +
       (isNew(item.date) ? '<span class="badge-new">NEW</span>' : '') + '</span>';
   }
-  function extMark(item) { return (!item.body && item.url) ? icon('ext', 'ext') + '<span class="visually-hidden">（外部サイト）</span>' : ''; }
-  function newsCard(item) {
+  function newsItemHtml(item) {
     var c = cat(item.category);
-    return '<li><a class="card news-card c-' + c.color + '" ' + linkAttrs(newsHref(item)) + '>' +
-      '<span class="news-card__img">' + newsThumb(item) + '</span>' +
-      '<span class="news-card__body">' + newsMeta(item) +
-      '<span class="news-card__title">' + esc(item.title) + extMark(item) + '</span></span></a></li>';
+    var external = !item.body && item.url;
+    var head = '<span class="news-item__thumb">' + newsThumb(item) + '</span>' +
+      '<span class="news-item__info">' + newsMeta(item) + '<span class="news-item__title">' + esc(item.title) + '</span></span>';
+    if (external) {
+      return '<li class="news-item c-' + c.color + '" id="news-' + esc(item.id) + '"><h3 class="news-item__h">' +
+        '<a class="news-item__head" ' + linkAttrs(item.url) + '>' + head + '<span class="news-item__toggle is-ext">' + icon('ext') + '<span class="visually-hidden">（外部サイト）</span></span></a></h3></li>';
+    }
+    return '<li class="news-item c-' + c.color + '" id="news-' + esc(item.id) + '"><h3 class="news-item__h">' +
+      '<button class="news-item__head" type="button" aria-expanded="false" aria-controls="news-' + esc(item.id) + '-panel">' + head +
+      '<span class="news-item__toggle" aria-hidden="true"><i></i></span></button></h3>' +
+      '<div class="news-item__panel" id="news-' + esc(item.id) + '-panel" hidden></div></li>';
   }
-
-  /* トップ：最新ニュース（大きい1件＋リスト） */
-  function renderNewsTop(el) {
-    var n = parseInt(el.getAttribute('data-news-top'), 10) || 6;
-    var items = NEWS.slice(0, n);
-    if (!items.length) { el.innerHTML = '<p class="empty">ニュースはまだありません。</p>'; return; }
-    var first = items[0], c = cat(first.category);
-    var html = '<a class="card news-feature c-' + c.color + ' reveal" ' + linkAttrs(newsHref(first)) + '>' +
-      '<div class="news-feature__img">' + newsThumb(first) + '</div>' +
-      '<div class="news-feature__body">' + newsMeta(first) +
-      '<h3 class="news-feature__title">' + esc(first.title) + extMark(first) + '</h3>' +
-      '<p class="news-feature__summary">' + esc(excerpt(first, 90)) + '</p></div></a>';
-    html += '<ul class="news-rows">' + items.slice(1).map(function (item, i) {
-      var ci = cat(item.category);
-      return '<li class="reveal" style="--delay:' + (i * 0.06) + 's"><a class="card news-row c-' + ci.color + '" ' + linkAttrs(newsHref(item)) + '>' +
-        '<span class="news-row__thumb">' + newsThumb(item) + '</span>' +
-        '<span class="news-row__body">' + newsMeta(item) + '<span class="news-row__title">' + esc(item.title) + extMark(item) + '</span></span>' +
-        icon('arrow', 'news-row__arrow') + '</a></li>';
-    }).join('') + '</ul>';
-    el.innerHTML = html;
+  function newsPanelHtml(item) {
+    var w = workById(item.work);
+    var html = '';
+    if (item.image) html += '<figure class="news-item__img"><img src="' + esc(item.image) + '" alt="' + esc(item.imageAlt || '') + '" loading="lazy" decoding="async"></figure>';
+    html += '<div class="prose">' + renderText(item.body) + '</div>';
+    if (item.links && item.links.length) {
+      html += '<div class="news-item__links btn-row">' + item.links.map(function (l) {
+        return '<a class="btn btn--sm" ' + linkAttrs(l.url) + '>' + esc(l.label) + icon(isExternal(l.url) ? 'ext' : 'arrow', 'icon--after') + '</a>';
+      }).join('') + '</div>';
+    }
+    if (item.bodyEn) {
+      html += '<details class="news-item__en" lang="en"><summary>English</summary><div class="prose">' + renderText(item.bodyEn) + '</div></details>';
+    }
+    if (w && !w.secret) {
+      html += '<div class="news-item__work c-' + esc(w.color) + '"><p class="news-item__work-label">この記事の作品</p>' + miniWork(w) + '</div>';
+    }
+    html += '<div class="news-item__share"><span>SHARE</span>' +
+      '<a class="btn btn--sm btn--x" href="https://x.com/intent/post?text=' + encodeURIComponent(item.title + '｜クレアクラン') + '&url=' + encodeURIComponent(newsUrl(item)) + '" target="_blank" rel="noopener">' + icon('x') + 'ポストする</a>' +
+      '<button class="btn btn--sm btn--white c-sky" type="button" data-copy="' + esc(newsUrl(item)) + '">' + icon('link') + '<span>リンクをコピー</span></button></div>';
+    return html;
   }
+  function newsUrl(item) { return location.origin + location.pathname + '#news-' + encodeURIComponent(item.id); }
 
-  /* ニュース一覧ページ */
-  function renderNewsList(el) {
-    var params = new URLSearchParams(location.search);
-    var current = params.get('cat');
-    if (current && !CATS[current]) current = null;
-    var PAGE = 12, limit = PAGE;
-
+  var newsApi = null;
+  function renderNews(el) {
+    var FIRST = parseInt(el.getAttribute('data-news'), 10) || 6, MORE = 10, limit = FIRST, current = null;
     var counts = {};
     NEWS.forEach(function (n) { counts[n.category] = (counts[n.category] || 0) + 1; });
-    var filters = '<div class="filters" role="group" aria-label="カテゴリーで絞り込み">' +
-      '<button class="filter filter--all" type="button" data-cat="" aria-pressed="' + (!current) + '">すべて<small>' + NEWS.length + '</small></button>' +
+    el.innerHTML = '<div class="filters" role="group" aria-label="ニュースをカテゴリーで絞り込み">' +
+      '<button class="filter filter--all" type="button" data-cat="" aria-pressed="true">すべて<small>' + NEWS.length + '</small></button>' +
       Object.keys(CATS).filter(function (k) { return counts[k]; }).map(function (k) {
-        return '<button class="filter c-' + CATS[k].color + '" type="button" data-cat="' + esc(k) + '" aria-pressed="' + (current === k) + '">' +
-          esc(CATS[k].label) + '<small>' + counts[k] + '</small></button>';
-      }).join('') + '</div>';
-    el.innerHTML = filters + '<div class="news-list" aria-live="polite"></div>';
-    var listEl = $('.news-list', el);
+        return '<button class="filter c-' + CATS[k].color + '" type="button" data-cat="' + esc(k) + '" aria-pressed="false">' + esc(CATS[k].label) + '<small>' + counts[k] + '</small></button>';
+      }).join('') + '</div><ol class="news-list"></ol><div class="news-more"></div>';
+    var listEl = $('.news-list', el), moreEl = $('.news-more', el);
 
+    function items() { return NEWS.filter(function (n) { return !current || n.category === current; }); }
     function draw() {
-      var items = NEWS.filter(function (n) { return !current || n.category === current; });
-      if (!items.length) { listEl.innerHTML = '<p class="empty">該当するニュースはありません。</p>'; return; }
-      var shown = items.slice(0, limit), html = '', year = null;
-      shown.forEach(function (item) {
-        var y = item.date.slice(0, 4);
-        if (y !== year) {
-          if (year !== null) html += '</ul>';
-          html += '<h2 class="news-year"><span class="news-year__label">' + y + '</span></h2><ul class="news-grid">';
-          year = y;
-        }
-        html += newsCard(item);
-      });
-      html += '</ul>';
-      if (items.length > limit) {
-        html += '<div class="news-more"><button class="btn btn--white" type="button" data-more>もっと見る（あと' + (items.length - limit) + '件）' + icon('down', 'icon--after') + '</button></div>';
-      }
-      listEl.innerHTML = html;
-      var more = $('[data-more]', listEl);
-      if (more) more.addEventListener('click', function () {
-        var nextIndex = limit;
-        limit += PAGE;
-        draw();
-        var cards = $$('.news-card', listEl);
-        if (cards[nextIndex]) cards[nextIndex].focus({ preventScroll: true });
-      });
+      var all = items();
+      listEl.innerHTML = all.slice(0, limit).map(newsItemHtml).join('') || '<li class="empty">該当するニュースはありません。</li>';
+      moreEl.innerHTML = all.length > limit
+        ? '<button class="btn btn--white" type="button">もっと見る（あと' + (all.length - limit) + '件）' + icon('down', 'icon--after') + '</button>' : '';
     }
+    function open(li, on) {
+      var btn = $('.news-item__head', li), panel = $('.news-item__panel', li);
+      if (!panel) return;
+      var item = NEWS.filter(function (n) { return 'news-' + n.id === li.id; })[0];
+      if (on && !panel.innerHTML) panel.innerHTML = newsPanelHtml(item);
+      panel.hidden = !on;
+      btn.setAttribute('aria-expanded', String(on));
+      li.classList.toggle('is-open', on);
+    }
+    listEl.addEventListener('click', function (e) {
+      var copy = e.target.closest('[data-copy]');
+      if (copy) {
+        var label = $('span', copy);
+        var done = function (ok) { label.textContent = ok ? 'コピーしました！' : 'コピーできませんでした'; setTimeout(function () { label.textContent = 'リンクをコピー'; }, 2200); };
+        if (navigator.clipboard) navigator.clipboard.writeText(copy.getAttribute('data-copy')).then(function () { done(true); }, function () { done(false); });
+        else done(false);
+        return;
+      }
+      var btn = e.target.closest('button.news-item__head');
+      if (!btn) return;
+      var li = btn.closest('.news-item');
+      var on = btn.getAttribute('aria-expanded') !== 'true';
+      open(li, on);
+      if (on && history.replaceState) history.replaceState(null, '', '#' + li.id);
+    });
+    moreEl.addEventListener('click', function (e) {
+      if (!e.target.closest('button')) return;
+      var first = limit;
+      limit += MORE; draw();
+      var next = $$('.news-item__head', listEl)[first];
+      if (next) next.focus({ preventScroll: true });
+    });
     $$('.filter', el).forEach(function (b) {
       b.addEventListener('click', function () {
         current = b.getAttribute('data-cat') || null;
-        limit = PAGE;
+        limit = FIRST;
         $$('.filter', el).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-        var url = new URL(location.href);
-        if (current) url.searchParams.set('cat', current); else url.searchParams.delete('cat');
-        history.replaceState(null, '', url);
         draw();
       });
     });
     draw();
+
+    // #news-<id> で開く（ほかの場所のリンクや、共有されたURLから）
+    newsApi = function (id) {
+      var idx = -1;
+      for (var i = 0; i < NEWS.length; i++) if (NEWS[i].id === id) { idx = i; break; }
+      if (idx < 0) return false;
+      current = null; limit = Math.max(limit, idx + 1);
+      $$('.filter', el).forEach(function (x) { x.setAttribute('aria-pressed', String(!x.getAttribute('data-cat'))); });
+      draw();
+      var li = document.getElementById('news-' + id);
+      if (!li) return false;
+      open(li, true);
+      requestAnimationFrame(function () { li.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); });
+      var head = $('.news-item__head', li);
+      if (head) head.focus({ preventScroll: true });
+      return true;
+    };
   }
-
-  /* ニュース記事ページ */
-  function setMeta(title, desc, image, url) {
-    document.title = title + '｜' + SITE_NAME;
-    if (url) {
-      var canon = $('link[rel="canonical"]'); if (canon) canon.setAttribute('href', url);
-      var ou = $('meta[property="og:url"]'); if (ou) ou.setAttribute('content', url);
-    }
-    var d = $('meta[name="description"]');
-    if (d && desc) d.setAttribute('content', desc);
-    var ot = $('meta[property="og:title"]'); if (ot) ot.setAttribute('content', title);
-    var od = $('meta[property="og:description"]'); if (od && desc) od.setAttribute('content', desc);
-    if (image && !isExternal(image)) {
-      var oi = $('meta[property="og:image"]');
-      if (oi) oi.setAttribute('content', new URL(image, location.href).href);
-    }
-  }
-  function renderArticle(el, id) {
-    var idx = -1;
-    for (var i = 0; i < NEWS.length; i++) if (NEWS[i].id === id) { idx = i; break; }
-    var heroTitle = $('[data-page-title]');
-    var crumb = $('[data-crumb-current]');
-    if (idx < 0) {
-      el.innerHTML = '<div class="article"><p class="empty">お探しのニュースが見つかりませんでした。</p>' +
-        '<div class="btn-row btn-row--center"><a class="btn" href="news.html">ニュース一覧へ' + icon('arrow', 'icon--after') + '</a></div></div>';
-      return;
-    }
-    var item = NEWS[idx], c = cat(item.category), w = workById(item.work);
-    var articleUrl = location.origin + location.pathname + '?id=' + encodeURIComponent(item.id);
-    setMeta(item.title, excerpt(item, 110), item.image, articleUrl);
-    if (crumb) {
-      crumb.innerHTML = '<a href="news.html">NEWS</a>';
-      crumb.removeAttribute('aria-current');
-      crumb.insertAdjacentHTML('afterend', '<li aria-current="page">' + esc(item.title.length > 24 ? item.title.slice(0, 24) + '…' : item.title) + '</li>');
-    }
-    // 記事ページでは記事のタイトルを h1 にするので、上の「NEWS」は見出しから外す
-    if (heroTitle && heroTitle.tagName === 'H1') {
-      var p = document.createElement('p');
-      p.className = heroTitle.className;
-      p.innerHTML = heroTitle.innerHTML;
-      heroTitle.parentNode.replaceChild(p, heroTitle);
-    }
-
-    var html = '<article class="article c-' + c.color + '">' +
-      '<header class="article__head">' + newsMeta(item) + '<h1 class="article__title">' + esc(item.title) + '</h1></header>';
-    if (item.image) {
-      html += '<figure class="article__img"><img src="' + esc(item.image) + '" alt="' + esc(item.imageAlt || '') + '" decoding="async"></figure>';
-    }
-    html += '<div class="prose">' + renderText(item.body || (item.summary ? item.summary : '')) + '</div>';
-    if (!item.body && item.url) {
-      html += '<div class="article__links btn-row"><a class="btn" ' + linkAttrs(item.url) + '>記事を読む' + icon('ext', 'icon--after') + '</a></div>';
-    }
-    if (item.links && item.links.length) {
-      html += '<div class="article__links btn-row">' + item.links.map(function (l) {
-        return '<a class="btn" ' + linkAttrs(l.url) + '>' + esc(l.label) + icon(isExternal(l.url) ? 'ext' : 'arrow', 'icon--after') + '</a>';
-      }).join('') + '</div>';
-    }
-    if (item.bodyEn) {
-      html += '<section class="article__en" lang="en" aria-label="English"><span class="article__en-label">English</span><div class="prose">' + renderText(item.bodyEn) + '</div></section>';
-    }
-    if (w) {
-      html += '<aside class="article__work c-' + w.color + '"><p class="article__work-label">この記事の作品</p>' + miniWork(w) + '</aside>';
-    }
-    var shareUrl = articleUrl;
-    var xText = item.title + '｜クレアクラン';
-    html += '<div class="article__share"><span class="article__share-label">SHARE</span>' +
-      '<a class="btn btn--sm btn--x" href="https://x.com/intent/post?text=' + encodeURIComponent(xText) + '&url=' + encodeURIComponent(shareUrl) + '" target="_blank" rel="noopener">' + icon('x') + 'ポストする</a>' +
-      '<button class="btn btn--sm btn--white c-sky" type="button" data-copy>' + icon('link') + '<span>リンクをコピー</span></button></div>';
-
-    var newer = NEWS[idx - 1], older = NEWS[idx + 1];
-    html += '<nav class="article-nav" aria-label="前後のニュース">' +
-      (older ? '<a class="card is-prev" href="' + esc(newsHref(older)) + '"><small>← PREV</small><span>' + esc(older.title) + '</span></a>' : '') +
-      (newer ? '<a class="card is-next" href="' + esc(newsHref(newer)) + '"><small>NEXT →</small><span>' + esc(newer.title) + '</span></a>' : '') +
-      '</nav>';
-    html += '<div class="sec-more"><a class="btn" href="news.html">ニュース一覧へ' + icon('arrow', 'icon--after') + '</a></div>';
-    html += '</article>';
-    el.innerHTML = html;
-
-    var copy = $('[data-copy]', el);
-    if (copy) copy.addEventListener('click', function () {
-      var label = $('span', copy);
-      function done(ok) { label.textContent = ok ? 'コピーしました！' : 'コピーできませんでした'; setTimeout(function () { label.textContent = 'リンクをコピー'; }, 2200); }
-      if (navigator.clipboard) navigator.clipboard.writeText(shareUrl).then(function () { done(true); }, function () { done(false); });
-      else done(false);
-    });
+  function openFromHash() {
+    var m = location.hash.match(/^#news-(.+)$/);
+    if (m && newsApi) newsApi(decodeURIComponent(m[1]));
   }
 
   /* ---------- 作品 ---------- */
+  var CARD_SPECS = ['プラットフォーム', '価格', '配信日', '発売時期', 'プレイ人数', 'ジャンル'];
   function workLinkButtons(w, small) {
     var size = small ? ' btn--sm' : '';
-    var html = '<a class="btn' + size + '" ' + linkAttrs(w.site) + '>公式サイトへ' + icon('ext', 'icon--after') + '</a>';
+    var html = w.site ? '<a class="btn' + size + '" ' + linkAttrs(w.site) + '>公式サイトへ' + icon('ext', 'icon--after') + '</a>' : '';
     (w.links || []).forEach(function (l) {
-      if (small && l.type !== 'steam') return;
-      var cls = l.type === 'steam' ? ' btn--steam' : l.type === 'youtube' ? ' btn--white' : ' btn--white';
-      var ic = l.type === 'steam' ? icon('steam') : l.type === 'youtube' ? icon('yt') : '';
-      html += '<a class="btn' + size + cls + '" ' + linkAttrs(l.url) + '>' + ic + esc(small && l.type === 'steam' ? 'Steam' : l.label) + '</a>';
+      if (l.type === 'steam') html += '<a class="btn' + size + ' btn--steam" ' + linkAttrs(l.url) + '>' + icon('steam') + 'Steam</a>';
+      else if (l.type === 'x') html += '<a class="btn' + size + ' btn--x" ' + linkAttrs(l.url) + '>' + icon('x') + esc(l.label) + '</a>';
     });
     return html;
   }
@@ -323,47 +247,29 @@
       '<div class="btn-row">' + workLinkButtons(w, true) + '</div></div></div>';
   }
   function workCard(w, i) {
-    return '<article class="card work-card c-' + esc(w.color) + ' reveal" style="--delay:' + (i * 0.08) + 's">' +
-      '<a class="work-card__visual" ' + linkAttrs(w.site) + ' tabindex="-1" aria-hidden="true">' +
-      '<img src="' + esc(w.image) + '" alt="" loading="lazy" decoding="async" width="1280" height="720">' +
+    var specs = CARD_SPECS.map(function (label) {
+      for (var k = 0; k < (w.specs || []).length; k++) if (w.specs[k][0] === label) return w.specs[k];
+      return null;
+    }).filter(Boolean).slice(0, 3);
+    var visual = '<img src="' + esc(w.image) + '" alt="' + (w.secret ? esc(w.imageAlt || '') : '') + '" loading="lazy" decoding="async" width="1280" height="720">' +
       '<span class="work-card__status">' + esc(w.statusLabel) + '</span>' +
-      (w.badge ? '<span class="work-card__badge">' + esc(w.badge) + '</span>' : '') + '</a>' +
+      (w.badge ? '<span class="work-card__badge">' + esc(w.badge) + '</span>' : '');
+    return '<article class="card work-card c-' + esc(w.color) + (w.secret ? ' is-secret' : '') + ' reveal" style="--delay:' + (i % 2 * 0.08) + 's">' +
+      (w.site ? '<a class="work-card__visual" ' + linkAttrs(w.site) + ' tabindex="-1" aria-hidden="true">' + visual + '</a>'
+        : '<div class="work-card__visual">' + visual + '</div>') +
       (w.chara ? '<img class="work-card__chara" src="' + esc(w.chara) + '" alt="" loading="lazy" decoding="async">' : '') +
       '<div class="work-card__body">' +
       '<p class="work-card__genre">' + esc(w.genre) + '</p>' +
-      '<h3 class="work-card__title"><a ' + linkAttrs(w.site) + '>' + esc(w.title) + '<span class="visually-hidden">（公式サイトを開く）</span></a><small lang="en">' + esc(w.titleEn) + '</small></h3>' +
+      '<h3 class="work-card__title">' + (w.site ? '<a ' + linkAttrs(w.site) + '>' + esc(w.title) + '<span class="visually-hidden">（公式サイトを開く）</span></a>' : '<span>' + esc(w.title) + '</span>') +
+      '<small lang="en">' + esc(w.titleEn) + '</small></h3>' +
       '<p class="work-card__catch">' + esc(w.catch) + '</p>' +
-      '<ul class="chips">' + (w.tags || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
+      ((w.tags || []).length ? '<ul class="chips">' + w.tags.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' : '') +
+      (specs.length ? '<dl class="work-card__spec">' + specs.map(function (s) { return '<div><dt>' + esc(s[0]) + '</dt><dd>' + esc(s[1]) + '</dd></div>'; }).join('') + '</dl>' : '') +
+      (w.note ? '<p class="work-card__note">※' + esc(w.note) + '</p>' : '') +
       '<div class="work-card__actions">' + workLinkButtons(w, true) + '</div>' +
       '</div></article>';
   }
-  function workDetail(w, i) {
-    var shots = (w.screenshots || []).map(function (s, j) {
-      return '<button type="button" data-zoom="' + esc(s) + '" aria-label="画像を拡大（' + (j + 1) + '枚目）"><img src="' + esc(s) + '" alt="" loading="lazy" decoding="async"></button>';
-    }).join('');
-    return '<section class="work-detail c-' + esc(w.color) + '" id="' + esc(w.id) + '" aria-labelledby="work-' + esc(w.id) + '">' +
-      '<div class="work-detail__grid">' +
-      '<div class="work-detail__visual reveal">' +
-      '<a class="work-detail__kv" ' + linkAttrs(w.site) + ' tabindex="-1" aria-hidden="true"><img src="' + esc(w.image) + '" alt="" ' + (i ? 'loading="lazy" ' : '') + 'decoding="async" width="1280" height="720"></a>' +
-      (w.chara ? '<img class="work-detail__chara" src="' + esc(w.chara) + '" alt="" loading="lazy">' : '') +
-      (shots ? '<div class="work-detail__shots' + (w.screenshotsSquare ? ' is-square' : '') + '">' + shots + '</div>' : '') +
-      '</div>' +
-      '<div class="work-detail__info reveal" style="--delay:.08s">' +
-      (w.logo ? '<img class="work-detail__logo" src="' + esc(w.logo) + '" alt="" loading="lazy">' : '') +
-      '<div class="work-detail__head"><span class="work-detail__status">' + esc(w.statusLabel) + '</span>' +
-      (w.badge ? '<span class="work-card__badge" style="position:static">' + esc(w.badge) + '</span>' : '') + '</div>' +
-      '<h2 class="work-detail__title" id="work-' + esc(w.id) + '">' + esc(w.title) + '<small lang="en">' + esc(w.titleEn) + '</small></h2>' +
-      '<p class="work-detail__catch">' + esc(w.catch) + '</p>' +
-      '<p class="work-detail__desc">' + esc(w.description) + '</p>' +
-      '<dl class="spec">' + (w.specs || []).map(function (s) { return '<div><dt>' + esc(s[0]) + '</dt><dd>' + esc(s[1]) + '</dd></div>'; }).join('') + '</dl>' +
-      (w.note ? '<p class="work-detail__note">※' + esc(w.note) + '</p>' : '') +
-      '<div class="btn-row">' + workLinkButtons(w, false) + '</div>' +
-      '</div></div></section>';
-  }
-  function renderWorks(el) {
-    var mode = el.getAttribute('data-works');
-    el.innerHTML = WORKS.map(mode === 'detail' ? workDetail : workCard).join('');
-  }
+  function renderWorks(el) { el.innerHTML = WORKS.map(workCard).join(''); }
 
   /* ---------- グッズ ---------- */
   function goodsCard(g, i) {
@@ -517,6 +423,7 @@
       idx++;
     }
     el.setAttribute('aria-hidden', 'true');
+    el.style.setProperty('--n', text.length);
     el.innerHTML = html;
     el.classList.add('is-built');
     el.insertAdjacentHTML('afterend', '<span class="visually-hidden">' + esc(text) + '</span>');
@@ -569,41 +476,64 @@
     }, { passive: true });
   }
 
-  /* ---------- 画像の拡大 ---------- */
-  function initZoom() {
-    var dlg = null;
-    document.addEventListener('click', function (e) {
-      var t = e.target.closest && e.target.closest('[data-zoom]');
-      if (!t) return;
-      if (!dlg) {
-        dlg = document.createElement('dialog');
-        dlg.className = 'lightbox';
-        dlg.innerHTML = '<button class="lightbox__close" type="button" aria-label="閉じる">×</button><img alt="">';
-        document.body.appendChild(dlg);
-        dlg.addEventListener('click', function (ev) { if (ev.target === dlg || ev.target.closest('.lightbox__close')) dlg.close(); });
-      }
-      $('img', dlg).src = t.getAttribute('data-zoom');
-      if (dlg.showModal) dlg.showModal(); else window.open(t.getAttribute('data-zoom'), '_blank');
+  /* ---------- 「すべて見る」で開く部分（これまでのあゆみ など） ---------- */
+  function initCollapse() {
+    $$('[data-collapse]').forEach(function (box) {
+      var btn = $('[data-collapse-toggle]', box.parentNode);
+      if (!btn) return;
+      var label = $('span', btn);
+      btn.addEventListener('click', function () {
+        var on = !box.classList.contains('is-open');
+        box.classList.toggle('is-open', on);
+        btn.setAttribute('aria-expanded', String(on));
+        if (label) label.textContent = on ? '閉じる' : 'すべて見る';
+        if (!on) box.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      });
     });
+  }
+
+  /* ---------- いま見ている場所をメニューで光らせる ---------- */
+  function initScrollSpy() {
+    var links = $$('.gnav__link[href^="#"], .gnav__guide[href^="#"]');
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    var map = {};
+    links.forEach(function (a) { var id = a.getAttribute('href').slice(1); (map[id] = map[id] || []).push(a); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) { a.removeAttribute('aria-current'); });
+        (map[en.target.id] || []).forEach(function (a) { a.setAttribute('aria-current', 'location'); });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(map).forEach(function (id) { var sec = document.getElementById(id); if (sec) io.observe(sec); });
   }
 
   /* ---------- 起動 ---------- */
   function init() {
     $$('[data-pickup]').forEach(renderPickup);
-    $$('[data-news-top]').forEach(renderNewsTop);
-    $$('[data-news-list]').forEach(function (el) {
-      var id = new URLSearchParams(location.search).get('id');
-      if (id) renderArticle(el, id); else renderNewsList(el);
-    });
+    $$('[data-news]').forEach(renderNews);
     $$('[data-works]').forEach(renderWorks);
     $$('[data-goods]').forEach(renderGoods);
     $$('.sec-title__en').forEach(function (el, i) { buildBlocks(el, i % COLORS.length); });
     initMenu();
     initToTop();
-    initZoom();
+    initCollapse();
+    initScrollSpy();
     initReveal();
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+    // ほかの場所（スライドなど）の「#news-<id>」リンクは、そのニュースを開いてスクロール
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#news-"]');
+      if (!a || !newsApi || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      var id = decodeURIComponent(a.getAttribute('href').slice(6));
+      if (newsApi(id)) {
+        e.preventDefault();
+        if (history.pushState) history.pushState(null, '', '#news-' + encodeURIComponent(id));
+      }
+    });
     // 画像やフォントの読み込みで位置がずれたあとも、見えているものは表示する
-    window.addEventListener('load', initReveal);
+    window.addEventListener('load', function () { initReveal(); if (/^#news-/.test(location.hash)) openFromHash(); });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

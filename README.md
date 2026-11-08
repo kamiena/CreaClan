@@ -8,20 +8,27 @@
 
 ## ページ構成
 
-| ファイル | 内容 |
+**トップページ（`index.html`）1枚に、すべての情報をまとめています。** 上から順に：
+
+| 場所（URL） | 内容 |
 | --- | --- |
-| `index.html` | トップ。ピックアップ（スライド）→ ニュース → 作品 → クレアクランとは → ラジオ・動画・ショップ → グッズ → クリエイター → 配信ガイドライン |
-| `news.html` | ニュース一覧（カテゴリーで絞り込み・年ごと）。`news.html?id=記事のid` で記事ページになります |
-| `works.html` | 作品一覧（概要・価格・プラットフォームなど）。各作品の公式サイトへ1クリックで移動できます |
-| `about.html` | クレアクランとは（紹介・看板娘・活動内容・これまでのあゆみ） |
-| `creators.html` | クリエイター一覧 |
-| `creator-kamiena.html` | カミエナの紹介（作品・映像・掲載記事・ラジオ・相談室・質問箱・グッズ） |
-| `goods.html` | グッズ一覧と BOOTH への案内 |
-| `guideline.html` | ゲーム実況・動画配信ガイドライン（配信規約） |
-| `404.html` | ページが見つからないとき |
+| （いちばん上） | ピックアップ（スライド）と、各場所へのショートカット |
+| `#news` | ニュース。カテゴリーで絞り込み・「もっと見る」。タイトルを押すと、その場で本文が開きます |
+| `#news-<id>` | そのニュースを開いた状態で表示（X などで共有するときのURL） |
+| `#works` | 作品。概要・価格・プラットフォームなどをカードで表示し、各作品の公式サイトへ1クリックで移動 |
+| `#about` | クレアクランとは（紹介文・数字・看板娘・代表カミエナ） |
+| `#history` | これまでのあゆみ（年表。はじめは途中まで表示し「すべて見る」で全部） |
+| `#contents` | ラジオ・動画・ショップ・公式X |
+| `#goods` | グッズ |
+| `#guideline` | ゲーム実況・動画配信ガイドライン（全文） |
+
+ヘッダーのメニュー（NEWS / WORKS / ABOUT / CONTENTS / GOODS / 配信ガイドライン）を押すと、その場所までスクロールします。
+
+- `news.html` `works.html` `about.html` `creators.html` `creator-kamiena.html` `goods.html` `guideline.html` は、以前のページのURLから来た人を、トップページの該当する場所へ転送するためだけのページです（`news.html?id=記事のid` → `#news-記事のid`）。
+- `404.html` … ページが見つからないとき
 
 ニュース・作品・グッズ・ピックアップは、`assets/data/` のデータファイルから自動で表示しています。
-**ふだんの更新は、データファイルを書き換えるだけ**で、トップページ・一覧・記事ページすべてに反映されます。
+**ふだんの更新は、データファイルを書き換えるだけ**で、トップページに反映されます。
 
 ## ニュースを追加する（いちばんよく使う作業）
 
@@ -37,17 +44,17 @@
 
    ```js
      {
-       id: "2026-11-01-sample",          // 記事のURLになる名前（半角英数字とハイフン。ほかと重ならないように）
+       id: "2026-11-01-sample",          // ニュースの名前（URLの #news-<id> になる。半角英数字とハイフン。ほかと重ならないように）
        date: "2026-11-01",               // 日付
        category: "event",                // 下の表のどれか
        title: "◯◯に出展します！",
        image: "assets/img/news/2026-11-01-sample.webp",
-       work: "garden-hunt",              // 関係する作品（なくてもOK）→ 記事の下に作品のリンクが出ます
+       work: "garden-hunt",              // 関係する作品（なくてもOK）→ 本文の下に作品のリンクが出ます
        body: `
    本文をここに書きます。
    空行を入れると段落が分かれます。
    `,
-       links: [{ label: "X の投稿を見る", url: "https://x.com/..." }],  // 記事の下のボタン（なくてもOK）
+       links: [{ label: "X の投稿を見る", url: "https://x.com/..." }],  // 本文の下のボタン（なくてもOK）
      },
    ```
 
@@ -70,23 +77,24 @@
 | `## 見出し` | 小見出し |
 | `- 項目` | 箇条書き |
 | `**文字**` | 太字 |
-| `[文字](https://...)` | リンク（外部サイトは新しいタブで開きます） |
+| `[文字](https://...)` | リンク（外部サイトは新しいタブで開きます。ページ内の場所は `#guideline` など） |
 | `![説明](assets/img/news/xxx.webp)` | 画像（1行で書く） |
 | `---` | 区切り線 |
 
-- 英語の本文がある場合は `bodyEn` に書くと、記事の下に「English」として表示されます。
-- 本文を書かずに外部の記事へ直接とばしたいときは、`body` のかわりに `url: "https://..."` を書きます。
+- 英語の本文がある場合は `bodyEn` に書くと、本文の下に「English」として表示されます（押すと開きます）。
+- 本文を書かずに、押したら外部の記事を開くようにしたいときは、`body` のかわりに `url: "https://..."` を書きます。
 - 日付から30日以内のニュースには、自動で「NEW」マークが付きます。
 
 ## そのほかの更新
 
 | やりたいこと | 書き換えるファイル |
 | --- | --- |
-| トップのスライド（ピックアップ）を変える | `assets/data/pickup.js`（画像は `assets/img/pickup/`、1600×900） |
-| 作品を追加・変更する | `assets/data/works.js`（画像は `assets/img/works/<作品のid>/`） |
+| トップのスライド（ピックアップ）を変える | `assets/data/pickup.js`（画像は `assets/img/pickup/`、1600×900。リンク先はURLか `#works`・`#news-ニュースのid` など） |
+| 作品を追加・変更する | `assets/data/works.js`（画像は `assets/img/works/<作品のid>/`）。まだ発表前の作品は `secret: true` で「？？？」のカードになります |
 | グッズを追加する | `assets/data/goods.js`（画像は `assets/img/goods/`） |
-| 「これまでのあゆみ」を足す | `about.html` の `HISTORY` のところ |
-| クリエイターを追加する | `creators.html` のカードを増やし、`creator-kamiena.html` をコピーして紹介ページを作る |
+| 「これまでのあゆみ」を足す | `index.html` の `HISTORY`（`<section … id="history">`）のところ |
+| 紹介文・看板娘・代表の紹介を変える | `index.html` の `ABOUT`（`<section … id="about">`）のところ |
+| 配信ガイドラインを変える | `index.html` の `GUIDELINE`（`<section … id="guideline">`）のところ |
 
 データを書き換えたら、毎回 `node tools/check-data.mjs` で確認してください。
 
@@ -116,40 +124,43 @@ Claude の作業ブランチ（`claude/…`）に入れただけでは公開さ�
 
 - 公式X（@creaclan_game）のプロフィールのWebサイト欄を新しいURLに変更
 - 各作品サイト（ガーデンハント・走れ！クレアちゃん・トラップス）やポートフォリオにある「クレアクラン公式HP」のリンク（`sites.google.com/view/creaclan`）を新しいURLに変更
-  - 『走れ！クレアちゃん』サイトの「配信ガイドラインを見る」は `guideline.html` へ
+  - 『走れ！クレアちゃん』サイトの「配信ガイドラインを見る」は `https://kamiena.github.io/CreaClan/#guideline` へ
 - 旧サイト（Google サイト）のトップに、新しいサイトへの案内を載せる
 - Google Search Console に `https://kamiena.github.io/CreaClan/sitemap.xml` を送信すると、検索に出やすくなります
 
 **独自ドメインなど別のURLで公開する場合**は、次の4か所の `https://kamiena.github.io/CreaClan/` を書き換えてください。
 
-- 各 HTML の `canonical` / `og:url` / `og:image`（と `index.html` の JSON-LD）
+- `index.html` の `canonical` / `og:url` / `og:image` / JSON-LD（と転送用ページの `canonical`）
 - `404.html` の `<base href="/CreaClan/">`（サイトの場所。独自ドメインの直下なら `/`）
 - `tools/check-data.mjs` の `BASE`
 - `sitemap.xml`（`node tools/check-data.mjs` で作り直されます）
 
 ## 更新するときの注意
 
-- CSS や JS（`assets/css/style.css`・`assets/js/*.js`）を変えたら、全 HTML の `?v=20261012` の数字を新しくしてください（見に来た人のブラウザに古いファイルが残らないように）。データファイル（`assets/data/*.js`）は不要です。
-- ヘッダー・フッターは全ページに同じものが入っています。メニューを変えるときは全ページをまとめて書き換えてください。
+- CSS や JS（`assets/css/style.css`・`assets/js/*.js`）を変えたら、全 HTML の `?v=20261108` の数字を新しくしてください（見に来た人のブラウザに古いファイルが残らないように）。データファイル（`assets/data/*.js`）は不要です。
+- ヘッダー・フッターは `index.html` と `404.html` に同じものが入っています（404 では `./#news` のように、トップページの場所を指しています）。メニューを変えるときは両方を書き換えてください。
 - JavaScript がオフのときは、ニュースや作品の一覧のかわりに案内文が表示されます。
 
 ## ファイル構成
 
 ```
-index.html, news.html, works.html, about.html, creators.html,
-creator-kamiena.html, goods.html, guideline.html, 404.html
+index.html                 … サイト本体（1ページ）
+404.html                   … ページが見つからないとき
+news.html, works.html, about.html, creators.html,
+creator-kamiena.html, goods.html, guideline.html … 以前のURLからトップページへの転送用
 favicon.ico / favicon.svg / apple-touch-icon.png
 sitemap.xml                … tools/check-data.mjs で自動作成
 assets/
   css/style.css            … デザイン（色は先頭の :root）
   css/fonts.css            … フォントの読み込み設定（tools/update_fonts.py で作成）
-  js/main.js               … データからの表示、スライド、メニュー、スクロール演出など
+  js/main.js               … データからの表示、ニュースの開閉、スライド、メニュー、スクロール演出など
   js/icons.js              … アイコン（X・YouTube・Steam など）
   data/news.js             … ニュース
   data/works.js            … 作品
   data/goods.js            … グッズ
   data/pickup.js           … トップのスライド
   img/                     … 画像（logo, bg, pickup, works, chara, news, goods, creators, contents）
+                             chara/*-full.webp は看板娘の全身（ABOUT）、works/new/ は「？？？」の新作
 tools/
   check-data.mjs           … データの確認と sitemap.xml の更新
   update_fonts.py          … fonts.css の作り直し
@@ -159,8 +170,8 @@ tools/
 
 - 旧公式HP（Google サイト）、各作品の公式サイト、カミエナのポートフォリオ、公式Xの投稿の画像を、縮小・WebP 変換して使っています。
 - 組み合わせて作った画像（描き足し・背景の切り抜きはしていません）
-  - `assets/img/logo/logo-h-*.webp`：ロゴの積み木と文字を横に並べたもの（ヘッダー用）
-  - `assets/img/works/crea-run/kv.webp`・`assets/img/pickup/crea-run.webp`：タイトル画面の床＋ロゴ＋ロケットに乗ったクレアちゃん
+  - `assets/img/logo/logo-h-120.webp`：いただいたロゴの積み木と、横書きの文字ロゴを横に並べたもの（ヘッダー用）
+  - `assets/img/works/new/kv.webp`・`assets/img/pickup/new.webp`：積み木の床＋はてなマークの積み木（開発中の新作用）
   - `assets/img/ogp.jpg`・`assets/img/news/2026-10-14-renewal.webp`：積み木の床＋ロゴ＋看板娘3人（SNS でシェアされたときの画像）
   - `assets/img/news/prj-rain.webp`：正方形の画像の左右を、同じ画像のぼかしで埋めたもの
 - `assets/img/logo/mark.svg`・`favicon.svg` は、ロゴの積み木を図形で描き直したもの（形・色はロゴと同じ）です。
@@ -168,4 +179,5 @@ tools/
 ## 確認してほしいところ
 
 - 『トラップス』のクマチの紹介文は、トラップス公式サイトの紹介文（仮）をもとにしています。
+- 「36,000DL突破」「ラジオ登録者1,000人突破」は、ポートフォリオ・公式Xの情報をもとにしています。数字が変わったら `index.html`（ABOUT）と `assets/data/works.js`（badge）を更新してください。
 - 旧サイトの「App Store」リンクは現在ページが無くなっているため、「スマートフォン版は現在公開停止中」と表記しています。

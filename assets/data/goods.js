@@ -2,7 +2,7 @@
    クレアクランのグッズ
 
    ▼ グッズを追加するときは、下の CC_GOODS の「[」のすぐ下に { … } を1つ足してください。
-     トップページ（新しい順に4つ）と、グッズページ（goods.html）に自動で表示されます。
+     トップページの「GOODS」に、上から順に自動で表示されます。
    ▼ status（販売のようす）の種類
      "booth"（BOOTHで販売中） / "event"（イベントで頒布） / "soon"（販売予定）
    ▼ 画像は assets/img/goods/ に入れてください（正方形か 16:9）。
@@ -12,9 +12,9 @@ window.CC_GOODS = [
   {
     name: "メイナのぬいぐるみ",
     year: "2026",
-    status: "soon",
+    status: "event",
     image: "assets/img/goods/plush.webp",
-    description: "『ガーデンハント』の主人公メイナのぬいぐるみ。イベントなどで販売予定です。",
+    description: "ずっと夢だった「ぬいぐるみ化」が実現！ Made in Heaven様の協力で制作した、『ガーデンハント』の主人公メイナのぬいぐるみ。2026年10月の全国エンタメまつり（ぜんため）で販売をスタートし、今後も各地のイベントで販売予定です。",
     link: { label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2101627937061556581" },
   },
   {
@@ -77,6 +77,6 @@ window.CC_GOODS = [
 
 window.CC_GOODS_STATUS = {
   booth: { label: "BOOTHで販売中", color: "pink" },
-  event: { label: "イベントで頒布", color: "mint" },
+  event: { label: "イベントで販売", color: "mint" },
   soon:  { label: "販売予定",       color: "yellow" },
 };

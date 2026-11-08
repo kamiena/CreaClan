@@ -7,8 +7,8 @@
 
    - assets/data/*.js（ニュース・作品・グッズ・ピックアップ）の必須項目、日付、id の重複、
      カテゴリー名、画像ファイルがあるかどうかを確認します。
-   - 各ページ（*.html）の中の画像・リンク先のファイルがあるかどうかも確認します。
-   - 問題がなければ sitemap.xml を作り直します（ニュース記事のURLも含めます）。
+   - 各ページ（*.html）の中の画像・リンク先のファイル、ページ内リンク（#news など）の行き先があるかどうかも確認します。
+   - 問題がなければ sitemap.xml を作り直します。
    ========================================================================== */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -28,8 +28,19 @@ function load(file) {
   vm.runInNewContext(fs.readFileSync(path.join(ROOT, file), 'utf8'), ctx, { filename: file });
   return ctx.window;
 }
+// トップページの中にある場所（id）。ニュースは #news-<id> で開けます
+const INDEX_HTML = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+const anchors = new Set([...INDEX_HTML.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
+let newsIds = new Set();
 function exists(p) {
-  if (!p || /^(https?:)?\/\//.test(p) || /^(mailto|tel):/.test(p) || p.startsWith('#')) return true;
+  if (!p) return true;
+  if (p.startsWith('#') || p.startsWith('./#')) {
+    const id = decodeURIComponent(p.slice(p.indexOf('#') + 1));
+    if (!id) return true;
+    if (id.startsWith('news-') && newsIds.has(id.slice(5))) return true;
+    return anchors.has(id);
+  }
+  if (/^(https?:)?\/\//.test(p) || /^(mailto|tel):/.test(p)) return true;
   const clean = decodeURI(p.split('#')[0].split('?')[0]);
   if (!clean) return true;
   return fs.existsSync(path.join(ROOT, clean));
@@ -44,6 +55,7 @@ const { CC_WORKS = [] } = load('assets/data/works.js');
 const { CC_GOODS = [], CC_GOODS_STATUS = {} } = load('assets/data/goods.js');
 const { CC_PICKUP = [] } = load('assets/data/pickup.js');
 const workIds = new Set(CC_WORKS.map((w) => w.id));
+newsIds = new Set(CC_NEWS.map((n) => n.id));
 
 // ニュース
 const ids = new Set();
@@ -71,7 +83,8 @@ CC_NEWS.forEach((n, i) => {
 // 作品
 CC_WORKS.forEach((w, i) => {
   const where = `works.js ${w.id || `#${i + 1}`}`;
-  ['id', 'title', 'titleEn', 'status', 'statusLabel', 'color', 'genre', 'catch', 'image', 'site'].forEach((k) => { if (!w[k]) err(where, `${k} がありません`); });
+  ['id', 'title', 'titleEn', 'status', 'statusLabel', 'color', 'genre', 'catch', 'image'].forEach((k) => { if (!w[k]) err(where, `${k} がありません`); });
+  if (!w.site && !w.secret) err(where, 'site（作品の公式サイトのURL）がありません（まだヒミツの作品なら secret: true）');
   if (w.color && !COLORS.includes(w.color)) err(where, `color は ${COLORS.join(' / ')} のどれかにしてください`);
   ['image', 'logo', 'chara'].forEach((k) => { if (w[k] && !exists(w[k])) err(where, `${k} の画像 ${w[k]} が見つかりません`); });
   (w.screenshots || []).forEach((s) => { if (!exists(s)) err(where, `スクリーンショット ${s} が見つかりません`); });
@@ -92,17 +105,20 @@ CC_PICKUP.forEach((p, i) => {
   if (!p.title) err(where, 'title がありません');
   if (!p.url) err(where, 'url がありません');
   if (p.color && !COLORS.includes(p.color)) err(where, `color は ${COLORS.join(' / ')} のどれかにしてください`);
-  const m = String(p.url || '').match(/^news\.html\?id=(.+)$/);
-  if (m && !ids.has(decodeURIComponent(m[1]))) err(where, `ニュース "${m[1]}" が news.js にありません`);
+  if (p.url && !exists(p.url)) err(where, `url の行き先 ${p.url} が見つかりません（ニュースなら "#news-ニュースのid"）`);
 });
 
 /* ---------- 各ページの画像・リンク ---------- */
 const pages = fs.readdirSync(ROOT).filter((f) => f.endsWith('.html'));
 pages.forEach((file) => {
-  if (file === '404.html') return; // 404 は <base> でサイトの場所を指定しているので対象外
   const html = fs.readFileSync(path.join(ROOT, file), 'utf8');
   for (const m of html.matchAll(/\s(?:src|href)="([^"]+)"/g)) {
-    const url = m[1].replace(/&amp;/g, '&');
+    let url = m[1].replace(/&amp;/g, '&');
+    if (file !== 'index.html' && url.startsWith('#') && !url.startsWith('#i-')) {
+      if (file === '404.html') url = './' + url; // 404 は <base> でトップページの場所を指定している
+      else continue;
+    }
+    if (url === '#top' || url === '#main' || url.startsWith('#i-') || url.startsWith('/')) continue; // #i-… はアイコン（icons.js）
     if (!exists(url)) err(file, `${url} が見つかりません`);
   }
 });
@@ -116,19 +132,10 @@ if (errors.length) {
 }
 
 /* ---------- sitemap.xml ---------- */
+// サイトはトップページ1枚（news.html などは、以前のURLからトップページへ転送するだけのページ）
 const sorted = CC_NEWS.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
 const latest = sorted[0] ? sorted[0].date : undefined;
-const urls = [
-  { loc: BASE, lastmod: latest },
-  { loc: BASE + 'news.html', lastmod: latest },
-  { loc: BASE + 'works.html' },
-  { loc: BASE + 'about.html' },
-  { loc: BASE + 'creators.html' },
-  { loc: BASE + 'creator-kamiena.html' },
-  { loc: BASE + 'goods.html' },
-  { loc: BASE + 'guideline.html' },
-  ...sorted.filter((n) => n.body).map((n) => ({ loc: `${BASE}news.html?id=${encodeURIComponent(n.id)}`, lastmod: n.date })),
-];
+const urls = [{ loc: BASE, lastmod: latest }];
 const xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
   urls.map((u) => `  <url><loc>${u.loc.replace(/&/g, '&amp;')}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}</url>`).join('\n') +
   '\n</urlset>\n';

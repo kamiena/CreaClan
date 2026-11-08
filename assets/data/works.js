@@ -2,9 +2,10 @@
    クレアクランの作品
 
    ▼ 新しい作品を追加するときは、下の CC_WORKS に { … } を1つ足してください。
-     トップページの「WORKS」と、作品一覧ページ（works.html）に自動で表示されます。
+     トップページの「WORKS」に自動で表示されます（カードを押すと、その作品の公式サイト site が開きます）。
      並び順は、この配列の順番のままです（上にあるものほど先に表示）。
 
+   ▼ secret: true にすると、作品名や情報をふせた「？？？」のカードになります（公式サイトのボタンも出ません）。
    ▼ status（状態）の種類
      "onsale"（好評配信中） / "free"（無料配信中） / "dev"（開発中）
    ▼ color（カードの色）
@@ -29,7 +30,7 @@ window.CC_WORKS = [
     chara: "assets/img/chara/meina.webp",
     charaName: "メイナ",
     site: "https://kamiena.github.io/GardenHunt/",
-    tags: ["Steam（PC）", "500円", "9言語対応", "日本語フルボイス"],
+    tags: ["9言語対応", "日本語フルボイス"],
     specs: [
       ["ジャンル", "ドットイート風 ヌメヌメ×おにごっこアクション"],
       ["プラットフォーム", "Steam（PC）"],
@@ -69,7 +70,7 @@ window.CC_WORKS = [
     chara: "assets/img/chara/kumachi.webp",
     charaName: "クマチ",
     site: "https://kamiena.github.io/Traps/",
-    tags: ["アナログゲーム", "2人対戦", "カードゲーム"],
+    tags: ["アナログゲーム", "心理戦"],
     specs: [
       ["ジャンル", "カードゲーム（アナログゲーム）"],
       ["プレイ人数", "2人"],
@@ -96,17 +97,17 @@ window.CC_WORKS = [
     status: "free",
     statusLabel: "無料配信中",
     color: "pink",
-    badge: "30,000DL突破！",
+    badge: "36,000DL突破！",
     genre: "ラン＆ジャンプ＆クラフトのアクションゲーム",
     catch: "走って、飛んで、積み木を集めて… 集めた積み木とレシピを使って、乗り物をクラフト！",
     description: "乗り物に乗っている間は獲得スコアがUPして、敵も障害物も倒せるように…！ たくさんクラフトして、ステージを駆け抜け、一気にスコアを稼ごう！ クレアクランの1作品目です。",
     image: "assets/img/works/crea-run/kv.webp",
-    imageAlt: "『走れ！クレアちゃん』ロゴと、積み木のロケットにまたがるクレアちゃん",
+    imageAlt: "『走れ！クレアちゃん』キービジュアル。積み木のロケットにまたがるクレアちゃん",
     logo: "assets/img/works/crea-run/logo.webp",
     chara: "assets/img/chara/crea.webp",
     charaName: "クレア",
     site: "https://kamiena.github.io/CreaRun/",
-    tags: ["Steam（Windows）", "無料"],
+    tags: ["積み木クラフト"],
     specs: [
       ["ジャンル", "ラン＆ジャンプ＆クラフトのアクションゲーム"],
       ["プラットフォーム", "Steam（Windows）"],
@@ -126,5 +127,25 @@ window.CC_WORKS = [
       "assets/img/works/crea-run/ss-2.webp",
       "assets/img/works/crea-run/ss-3.webp",
     ],
+  },
+
+  {
+    id: "new",
+    secret: true,
+    title: "？？？",
+    titleEn: "New Game",
+    status: "dev",
+    statusLabel: "開発中",
+    color: "sky",
+    genre: "新作ゲーム",
+    catch: "ただいま、新しいゲームをこっそり開発中…！ どんなゲームかは、まだヒミツです。続報をお楽しみに♪",
+    image: "assets/img/works/new/kv.webp",
+    imageAlt: "新作ゲーム（タイトル未発表）。はてなマークの積み木",
+    specs: [
+      ["ジャンル", "？？？"],
+      ["プラットフォーム", "？？？"],
+      ["発売時期", "？？？"],
+    ],
+    links: [{ type: "x", label: "続報は X で", url: "https://x.com/KamiEna_Game" }],
   },
 ];

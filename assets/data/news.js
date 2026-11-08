@@ -3,16 +3,16 @@
 
    ▼ ニュースの追加のしかた
      下の CC_NEWS の「[」のすぐ下に、{ … }, のかたまりを1つ足すだけです。
-     トップページ・ニュース一覧・記事ページに自動で反映されます（並び順は日付の新しい順）。
+     トップページの「NEWS」に自動で反映されます（並び順は日付の新しい順。はじめは新しい6件を表示）。
+     タイトルを押すと、その場で本文が開きます。各ニュースは https://kamiena.github.io/CreaClan/#news-<id> で直接開けます。
 
      {
-       id: "2026-10-20-sample",        // 記事のURLになる名前（半角英数字とハイフン。ほかと重ならないように）
+       id: "2026-10-20-sample",        // ニュースの名前（URLの #news-<id> になる。半角英数字とハイフン。ほかと重ならないように）
        date: "2026-10-20",             // 日付（YYYY-MM-DD）
        category: "info",               // info / release / event / media / goods（下の CC_NEWS_CATEGORIES）
        title: "タイトル",
        image: "assets/img/news/2026-10-20-sample.webp", // 画像（16:9がおすすめ。なくてもOK）
        work: "garden-hunt",            // 関係する作品（works.js の id。なくてもOK）
-       summary: "一覧に出す短い説明",   // なければ本文の最初から自動で作ります
        body: `
 本文をここに書きます。空行で段落が分かれます。
 
@@ -22,8 +22,8 @@
 ![画像の説明](assets/img/news/xxx.webp)
 `,
        bodyEn: `English text (optional)`,      // 英語の本文（なくてもOK）
-       links: [ { label: "ボタンの文字", url: "https://..." } ], // 記事の下に出すボタン（なくてもOK）
-       // url: "https://...",          // ← 本文なしで外部ページに直接とばしたいときだけ
+       links: [ { label: "ボタンの文字", url: "https://..." } ], // 本文の下に出すボタン（なくてもOK）
+       // url: "https://...",          // ← 本文なしで、押したら外部ページを開きたいときだけ
      },
 
    ▼ 画像は assets/img/news/ に入れてください（横幅 960px 程度の WebP / JPG / PNG）。
@@ -40,6 +40,25 @@ window.CC_NEWS_CATEGORIES = {
 
 window.CC_NEWS = [
   {
+    id: "2026-10-17-zentame",
+    date: "2026-10-17",
+    category: "event",
+    title: "第9回 全国エンタメまつり（ぜんため）に初出展しました！",
+    image: "assets/img/news/2026-09-20-meina-plush-2.webp",
+    imageAlt: "メイナのぬいぐるみ",
+    work: "garden-hunt",
+    body: `
+2026年10月17日（土）・18日（日）に岐阜県・各務原市民公園で開催された「第9回 全国エンタメまつり（ぜんため）」に、クレアクランとして初めて出展しました！🎉
+
+- 『ガーデンハント』を出展
+- 新グッズ「メイナのぬいぐるみ」の販売をスタート
+- イベント限定のパッケージ版は完売しました
+
+さらに、開発中の新作のシークレット試遊も行いました…！
+遊びに来てくださった皆様、本当にありがとうございました！
+`,
+  },
+  {
     id: "2026-10-14-renewal",
     date: "2026-10-14",
     category: "info",
@@ -49,15 +68,33 @@ window.CC_NEWS = [
     body: `
 クレアクラン公式ホームページをリニューアルしました！🎉
 
-トップページから最新のニュースや作品をすぐに見られるようになり、各作品の公式サイトへもワンクリックで移動できるようになりました。
+ニュース・作品・クレアクランの紹介・グッズ・[ゲーム実況・動画配信ガイドライン](#guideline)を、1つのページにぎゅっとまとめました。
+上のメニューを押すと、その場所までスクロールして移動します。ニュースは、タイトルを押すとその場で開いて読めます♪
 
-また、[ゲーム実況・動画配信ガイドライン](guideline.html)や[グッズ](goods.html)、[クリエイター](creators.html)のページも見やすくまとめています。
+作品は、それぞれの公式サイトへワンクリックで移動できます。
 
 これからも、新作の開発情報やイベント出展、グッズなどの最新情報をどんどんお届けしていきます♪
 引き続き、クレアクランをよろしくお願いいたします！
 `,
   },
+  {
+    id: "2026-10-10-are-you-there",
+    date: "2026-10-10",
+    category: "event",
+    title: "代表カミエナが手がける『ARE YOU THERE?』が、フランスの芸術祭で世界初公開！",
+    image: "assets/img/news/2026-10-10-are-you-there.webp",
+    imageAlt: "『ARE YOU THERE?』銅の少女の像",
+    body: `
+代表のカミエナが企画・ディレクション・プロデュースを手がける、工芸×ゲームのゲームアート『PRJ CÔGEIMU 02 Kagane「ARE YOU THERE?」』が、フランス・アルルの国際展「Anima Ludens」で世界初公開されました！✨
 
+芸術祭「Festival Octobre Numérique – Faire Monde 2026」のメインプログラムとしての展示です（会期：10月10日〜11月8日）。
+日本語ボイスは東山奈央さん、英語ボイスは天城サリーさん。カミエナにとって、人生初の海外出展になりました！
+`,
+    links: [
+      { label: "PRJ CÔGEIMU 公式サイト", url: "https://kamiena.github.io/cogeimu/" },
+      { label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2108573541897793794" },
+    ],
+  },
   {
     id: "2026-09-20-meina-plush",
     date: "2026-09-20",
@@ -67,17 +104,31 @@ window.CC_NEWS = [
     imageAlt: "メイナのぬいぐるみ3体",
     work: "garden-hunt",
     body: `
-『ガーデンハント』の主人公「メイナ」のぬいぐるみが、ついに完成しました！🎉
+ずっと夢だった「ぬいぐるみ化」が実現！ 『ガーデンハント』の主人公「メイナ」のぬいぐるみが、ついに完成しました！🎉
+制作にあたっては、Made in Heaven様にご協力いただきました。
 
 ゲームのキャラクターが、こうやって実物になるのはとってもうれしいです……！
 
 ![メイナのぬいぐるみ](assets/img/news/2026-09-20-meina-plush-2.webp)
 
-今後、イベントなどで販売予定です。続報をお楽しみに♪
+【追記】10月の「全国エンタメまつり（ぜんため）」で販売をスタートしました！ 今後も各地のイベントで販売予定です♪
 `,
     links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2101627937061556581" }],
   },
+  {
+    id: "2026-08-18-gamezensen",
+    date: "2026-08-18",
+    category: "media",
+    title: "ゲーム前線様に『ガーデンハント』のレビューを掲載いただきました",
+    image: "assets/img/works/garden-hunt/ss-8.webp",
+    work: "garden-hunt",
+    body: `
+『ガーデンハント』のくわしいレビュー記事を掲載していただきました！
 
+▼記事
+[【徹底解説】ガーデンハント レビュー「パックマンライクなゲーム」（まとめ画像付き）](https://gamezensen.hatenablog.com/entry/Garden_Hunt_rreview)
+`,
+  },
   {
     id: "2026-08-15-c108",
     date: "2026-08-15",
@@ -103,7 +154,6 @@ window.CC_NEWS = [
 `,
     links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/2088432357695271340" }],
   },
-
   {
     id: "2026-07-10-guideline",
     date: "2026-07-10",
@@ -115,11 +165,10 @@ window.CC_NEWS = [
 私たちのゲームは、個人・法人問わず、どなたでも自由に実況・動画配信を行っていただけます。事前の連絡や確認も一切不要です。
 動画配信プラットフォームの公式機能を利用した収益化も大歓迎です♪
 
-くわしくは[ゲーム実況・動画配信ガイドライン](guideline.html)をご覧ください。
+くわしくは[ゲーム実況・動画配信ガイドライン](#guideline)をご覧ください。
 `,
-    links: [{ label: "ガイドラインを見る", url: "guideline.html" }],
+    links: [{ label: "ガイドラインを見る", url: "#guideline" }],
   },
-
   {
     id: "2026-07-07-kaiwai-hall-10",
     date: "2026-07-07",
@@ -132,7 +181,25 @@ BitSummit を取材した、インディーゲーム特集の第2弾です。番
 `,
     links: [{ label: "番組を見る（YouTube）", url: "https://www.youtube.com/watch?v=aq1FHu8H-Mg" }],
   },
+  {
+    id: "2026-05-20-404-game-center",
+    date: "2026-05-20",
+    category: "event",
+    title: "常設展示「404ゲームセンター：ars●bitセレクション」第1弾で『ガーデンハント』を展示！",
+    image: "assets/img/works/garden-hunt/ss-5.webp",
+    work: "garden-hunt",
+    body: `
+渋谷サクラステージの「404 Not Found」で始まった常設展示「404ゲームセンター：ars●bitセレクション」の第1弾作品として、『ガーデンハント』が展示されています！
 
+プロジェクト特製のオリジナルアップライト筐体（立って遊ぶアーケード筐体）で遊ぶことができます🎮
+
+- 会期：2026年5月20日〜7月31日（予定）
+- 会場：404 Not Found（Shibuya Sakura Stage 4F）
+
+▼くわしくはこちら
+[常設展示「404ゲームセンター：ars●bitセレクション」が、開業2周年を迎える渋谷404 Not Foundにて始動！（ars●bit）](https://www.arsobit.com/exhibitions-20260626/)
+`,
+  },
   {
     id: "2026-05-05-kaiwai-hall-4",
     date: "2026-05-05",
@@ -149,7 +216,21 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
 `,
     links: [{ label: "番組を見る（YouTube）", url: "https://www.youtube.com/watch?v=DnmBOhPELe0&t=199s" }],
   },
+  {
+    id: "2026-05-03-tgd12",
+    date: "2026-05-03",
+    category: "event",
+    title: "東京ゲームダンジョン12に出展しました！",
+    image: "assets/img/works/garden-hunt/ss-7.webp",
+    work: "garden-hunt",
+    body: `
+2026年5月3日（日）に開催された「東京ゲームダンジョン12」に出展しました！
+ブースに遊びに来てくださった皆様、ありがとうございました！
 
+▼イベントレポート
+[【東京ゲームダンジョン12】イベントレポ（Kaburanai Games）](https://gamersizayuke.com/tyokyogamedungeon12_report/)
+`,
+  },
   {
     id: "2026-02-13-gamemakers",
     date: "2026-02-13",
@@ -164,7 +245,20 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
 [初開催の「SHIBUYA GAMES WEEK 2026」現地レポート！ゲームを楽しむ、そして“ゲームを通じて渋谷の街を知る”都市型ゲームフェス](https://gamemakers.jp/article/2026_02_13_131159/)
 `,
   },
+  {
+    id: "2026-02-06-shibuya-games-week",
+    date: "2026-02-06",
+    category: "event",
+    title: "SHIBUYA GAMES WEEK 2026「エキマエゲームパーク」に『ガーデンハント』を出展！",
+    image: "assets/img/works/garden-hunt/ss-4.webp",
+    work: "garden-hunt",
+    body: `
+渋谷の街を舞台にした都市型ゲームフェス「SHIBUYA GAMES WEEK 2026」（2月6日〜15日）の「エキマエゲームパーク」に、『ガーデンハント』を出展しました！
 
+▼関連記事
+[渋谷の街をゲームがジャック！「SHIBUYA GAMES WEEK 2026」が本日開幕（Yahoo!ニュース）](https://news.yahoo.co.jp/expert/articles/462e39e3aeae041c6d96e8cfef97c62e79add002)
+`,
+  },
   {
     id: "2026-02-06-4gamer",
     date: "2026-02-06",
@@ -179,7 +273,6 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
 [渋谷に行くなら，ふらりとゲームも楽しもう。都市型ゲームフェス「SHIBUYA GAMES WEEK」で遊べるインディーゲームまとめ](https://www.4gamer.net/games/991/G999110/20260206031/)
 `,
   },
-
   {
     id: "2026-01-20-mudauchi",
     date: "2026-01-20",
@@ -194,7 +287,6 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
 [『ガーデンハント』“あの角を曲がったら…？”のドキドキ感がやみつきになる！ヌメヌメ×おにごっこアクションが1月16日に配信開始。](https://mudauchi.info/428906)
 `,
   },
-
   {
     id: "2026-01-17-dengeki",
     date: "2026-01-17",
@@ -209,7 +301,6 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
 [ドットイート風ヌメヌメ×おにごっこアクション『ガーデンハント』が配信。ヌメヌメシステムが戦略要素をアツくする](https://dengekionline.com/article/202601/63360)
 `,
   },
-
   {
     id: "2026-01-16-gamewith",
     date: "2026-01-16",
@@ -224,7 +315,6 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
 [『ガーデンハント』1月16日から発売開始！スライムを集めるドットイート風のヌメヌメおにごっこゲーム](https://gamewith.jp/gamedb/13858/articles/52181)
 `,
   },
-
   {
     id: "2026-01-16-garden-hunt-release",
     date: "2026-01-16",
@@ -252,7 +342,6 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
       { label: "Steamストアページ", url: "https://store.steampowered.com/app/3820430/" },
     ],
   },
-
   {
     id: "2025-12-06-automaton-west",
     date: "2025-12-06",
@@ -267,7 +356,26 @@ BSフジ『界隈ほーる 〜偏愛の穴に落ちてみた〜』#4「インデ
 [Garden slug-girl action, masochistic platforming and summer vacation nostalgia: 5 outdoorsy Japanese indie games](https://automaton-media.com/en/news/garden-slug-girl-action-masochistic-platforming-and-summer-vacation-nostalgia-5-outdoorsy-japanese-indie-games/)
 `,
   },
+  {
+    id: "2025-11-08-tgd10",
+    date: "2025-11-08",
+    category: "event",
+    title: "東京ゲームダンジョン10に出展します！（11/9 3P-8）",
+    image: "assets/img/news/2025-11-08-tgd10.webp",
+    imageAlt: "『ガーデンハント』",
+    work: "garden-hunt",
+    body: `
+11月9日（日）開催の「東京ゲームダンジョン10」に出展します！🎉
 
+ナメツムリが庭園を駆け回る「ヌメヌメ × おにごっこ」な、ドットイート風3Dアクションゲーム『ガーデンハント』を展示予定です✨
+
+**会場3階【3P-8】**でお待ちしております～！
+
+▼イベントレポート（追記）
+[【イベントレポ】: 東京ゲームダンジョン10（Raspberlyのブログ）](https://raspberly.hateblo.jp/entry/TokyoGameDungeon10)
+`,
+    links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1986811126475051468" }],
+  },
   {
     id: "2025-09-08-meina-figure",
     date: "2025-09-08",
@@ -283,25 +391,62 @@ Trend3D様に、『ガーデンハント』の主人公「メイナ」のフィ�
 `,
     links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1964983203388940475" }],
   },
-
   {
-    id: "2025-07-02-garden-hunt-steam-page",
-    date: "2025-07-02",
-    category: "release",
-    title: "『ガーデンハント』のSteamストアページを公開しました！",
-    image: "assets/img/works/garden-hunt/ss-8.webp",
+    id: "2025-08-09-c106-beta",
+    date: "2025-08-09",
+    category: "event",
+    title: "夏コミC106で『ガーデンハント』β版ROMを頒布します！",
+    image: "assets/img/news/2025-08-09-c106-beta.webp",
+    imageAlt: "『ガーデンハント』β版ROMのパッケージ",
     work: "garden-hunt",
     body: `
-開発中の新作『ガーデンハント』の、Steamストアページを公開しました！
+夏コミ C106 で頒布する、『ガーデンハント』β版ROMのパッケージデザインができました✨
+
+2日目の同人ゲームエリアで出展しています🎮 コミケにいらっしゃる方は、ぜひブースに遊びに来てください♪
+
+【追記】β版ROMは、ディスク版・ダウンロード版ともに完売しました！ ありがとうございました！
+`,
+    links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1954135570306773268" }],
+  },
+  {
+    id: "2025-07-30-tgd9",
+    date: "2025-07-30",
+    category: "event",
+    title: "東京ゲームダンジョン9に出展します！（8/3 4L-2）",
+    image: "assets/img/news/2025-07-30-tgd9.webp",
+    imageAlt: "『ガーデンハント』",
+    work: "garden-hunt",
+    body: `
+8月3日（日）開催の「東京ゲームダンジョン9」に、クレアクランも出展します！🎉
+
+ブースは**4階【4L-2】**。開発中の新作『ガーデンハント』を展示します。
+ぜひぜひ、遊びに来てください😄
+`,
+    links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1950529053297115360" }],
+  },
+  {
+    id: "2025-07-01-garden-hunt-steam-page",
+    date: "2025-07-01",
+    category: "release",
+    title: "『ガーデンハント』のSteamストアページを公開しました！",
+    image: "assets/img/news/2025-07-01-steam-page.webp",
+    imageAlt: "『ガーデンハント』のSteamストアページ",
+    work: "garden-hunt",
+    body: `
+開発中の新作『ガーデンハント』の、Steamストアページを公開しました！🎉
+
+ヌメヌメ ✕ おにごっこ！？ ナメツムリが駆けまわる、新感覚のドットイート風アクションゲームです🐌
 
 ストアページの公開にあわせて、メディア各社様にも記事を掲載していただきました。
 
 - 4Gamer.net：[ナメツムリの少女を操作して，スライムを捕獲していく鬼ごっこアクション「ガーデンハント」，Steamストアページを公開。リリース時期は年内](https://www.4gamer.net/games/925/G092584/20250702004/)
 - Gamer：[ナメツムリの少女がスライムを追うヌメヌメおにごっこアクション「ガーデンハント」のSteamストアページが公開！誰かが通ると地面に残る「ヌメリ道」を活かしてステージクリアを目指そう](https://www.gamer.ne.jp/news/202507020067/)
 `,
-    links: [{ label: "Steamストアページ", url: "https://store.steampowered.com/app/3820430/" }],
+    links: [
+      { label: "Steamストアページ", url: "https://store.steampowered.com/app/3820430/" },
+      { label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1940002473378558013" },
+    ],
   },
-
   {
     id: "2025-06-14-crearun-30000dl",
     date: "2025-06-14",
@@ -318,7 +463,39 @@ Trend3D様に、『ガーデンハント』の主人公「メイナ」のフィ�
 `,
     links: [{ label: "X の投稿を見る", url: "https://x.com/creaclan_game/status/1933841850227663332" }],
   },
+  {
+    id: "2025-06-07-c106",
+    date: "2025-06-07",
+    category: "event",
+    title: "夏コミC106に当選しました！",
+    image: "assets/img/news/2025-06-07-c106.webp",
+    imageAlt: "C106 サークルカット",
+    body: `
+夏コミ（コミックマーケット106）に当選しました！🎉
 
+**2日目 日曜日　東地区 “Ｖ”ブロック－01ab（東7ホール）**
+
+新作『ガーデンハント』の開発、頑張ります！💪
+
+▼サークルページ
+[https://webcatalog.circle.ms/Perma/Circle/10463569/](https://webcatalog.circle.ms/Perma/Circle/10463569/)
+`,
+    links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1931305138540736852" }],
+  },
+  {
+    id: "2025-05-26-game-sekai",
+    date: "2025-05-26",
+    category: "event",
+    title: "「ゲーム世界展開会議」で『ガーデン ハント』のブース展示が決定！",
+    image: "assets/img/works/garden-hunt/ss-6.webp",
+    work: "garden-hunt",
+    body: `
+DMM.com様の本社で開催されるイベント「ゲーム世界展開会議」にて、開発中の新作『ガーデン ハント』のブース展示が決定しました✨
+
+出展、頑張ってきます！💪
+`,
+    links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1926986185915724251" }],
+  },
   {
     id: "2025-05-16-indie-freaks",
     date: "2025-05-16",
@@ -334,7 +511,6 @@ Trend3D様に、『ガーデンハント』の主人公「メイナ」のフィ�
 [ヌメヌメっと滑りながら庭園迷路を駆け回るアクションゲーム『PRJ rain（仮）』ブースレポート【東京ゲームダンジョン8】](https://www.indie-freaks.com/2025/05/tgd8-prj-rain)
 `,
   },
-
   {
     id: "2025-05-09-realsound",
     date: "2025-05-09",
@@ -350,7 +526,25 @@ Trend3D様に、『ガーデンハント』の主人公「メイナ」のフィ�
 [レトロでかわいいタワーディフェンスから、子どもの大好きな“アレ”題材のアクションまで　「東京ゲームダンジョン8」会場レポート](https://realsound.jp/tech/2025/05/post-2013950.html)
 `,
   },
+  {
+    id: "2025-05-04-tgd8",
+    date: "2025-05-04",
+    category: "event",
+    title: "東京ゲームダンジョン8に初出展しました！",
+    image: "assets/img/news/2025-05-04-tgd8.webp",
+    imageAlt: "東京ゲームダンジョン8 のクレアクランのブース",
+    work: "garden-hunt",
+    body: `
+5月4日（日）開催の「東京ゲームダンジョン8」に、クレアクランとして初めて出展しました！🎉
 
+ブースは3階【3S-12】。開発中の新作『PRJ rain（仮）』（現『ガーデンハント』）を無料で試遊していただきました。
+
+本当にたくさんの方にゲームを遊んでいただけて、非常に実りのある1日になりました✨ 応援の言葉もたくさんいただいたので、完成に向けて開発頑張ります！💪
+
+![東京ゲームダンジョン8 のブース](assets/img/news/2025-05-04-tgd8-booth.webp)
+`,
+    links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1919000056327184855" }],
+  },
   {
     id: "2025-02-09-radio",
     date: "2025-02-09",
@@ -420,7 +614,6 @@ Feel free to listen while working and enjoy the relaxed atmosphere!
       { label: "Spotify で聴く", url: "https://open.spotify.com/show/1z4FqQ5kkyGWxAdeQIVdQV" },
     ],
   },
-
   {
     id: "2025-01-03-c105",
     date: "2025-01-03",
@@ -477,7 +670,6 @@ We’ll keep working hard on game development, and we hope you’ll continue to 
 `,
     links: [{ label: "BOOTH 販売ページ", url: "https://creaclan.booth.pm/items/6448523" }],
   },
-
   {
     id: "2025-01-02-gamespark",
     date: "2025-01-02",
@@ -493,7 +685,25 @@ We’ll keep working hard on game development, and we hope you’ll continue to 
 [「コミックマーケット105」インディーゲームブースレポート！ 昔ながらのイベントで出会った魅力的な作品を3本ピックアップ](https://www.gamespark.jp/article/2025/01/02/148188.html)
 `,
   },
+  {
+    id: "2024-11-08-c105",
+    date: "2024-11-08",
+    category: "event",
+    title: "冬コミC105に当選しました！",
+    image: "assets/img/news/2024-11-08-c105.webp",
+    imageAlt: "C105 サークルカット",
+    body: `
+冬コミ（コミックマーケット105）に当選しました！🎉
 
+サークル「クレアクラン」は**月曜日　西地区 “き”ブロック－27ab（西2ホール）**に配置されました！
+
+新作の開発、ガンガン進めます！💪
+
+▼コミケWebカタログ
+[https://webcatalog.circle.ms/Perma/Circle/10463569/](https://webcatalog.circle.ms/Perma/Circle/10463569/)
+`,
+    links: [{ label: "X の投稿を見る", url: "https://x.com/KamiEna_Game/status/1854827625736552937" }],
+  },
   {
     id: "2024-06-10-c104",
     date: "2024-06-10",
@@ -518,7 +728,6 @@ We plan to have a prototype of our new work and new merchandise, so please come 
 [https://webcatalog-free.circle.ms/Circle/19006570](https://webcatalog-free.circle.ms/Circle/19006570)
 `,
   },
-
   {
     id: "2024-06-03-crearun-page",
     date: "2024-06-03",
@@ -533,7 +742,6 @@ PRODUCTページに、「走れ！クレアちゃん」を追加しました！
 ※現在は、[『走れ！クレアちゃん』公式サイト](https://kamiena.github.io/CreaRun/)で作品の情報をご覧いただけます。
 `,
   },
-
   {
     id: "2024-06-03-website",
     date: "2024-06-03",
@@ -546,7 +754,6 @@ PRODUCTページに、「走れ！クレアちゃん」を追加しました！
 制作したゲームの情報はもちろん、イベント参加の情報など、いろいろと掲載していこうと思います♪
 `,
   },
-
   {
     id: "2023-08-22-crearun-steam",
     date: "2023-08-22",
@@ -563,7 +770,6 @@ PRODUCTページに、「走れ！クレアちゃん」を追加しました！
 `,
     links: [{ label: "Steamストアページ", url: "https://store.steampowered.com/app/2547610/" }],
   },
-
   {
     id: "2023-08-13-c102",
     date: "2023-08-13",
