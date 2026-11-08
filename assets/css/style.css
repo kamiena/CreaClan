@@ -883,6 +883,9 @@ html:not(.js) .history-more { display: none; }
 /* ---------- Contents（ラジオ・BOOTH など） ---------- */
 .contents-grid { display: grid; gap: 22px; }
 @media (min-width: 760px) { .contents-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .contents-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.goods-box { margin-top: 8px; scroll-margin-top: 0; }
+.goods-box__lead { margin: -10px auto 26px; text-align: center; }
 @media (min-width: 1100px) { .content-card__body { padding: 20px 24px 24px; } }
 .content-card { display: flex; flex-direction: column; overflow: hidden; border-color: var(--c-light); box-shadow: 0 var(--edge) 0 var(--c-light); }
 .content-card__visual { position: relative; aspect-ratio: 16 / 9; background: var(--c-soft); overflow: hidden; }

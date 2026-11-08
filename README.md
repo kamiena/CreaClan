@@ -19,11 +19,11 @@
 | `#news-<id>` | そのニュースを開いた状態で表示（X などで共有するときのURL） |
 | `#media` | メディア掲載・実況動画（テレビ／WEB記事／実況・プレイ動画。はじめは一部だけ表示し「もっと見る」で全部） |
 | `#history` | これまでのあゆみ（年表。はじめは途中まで表示し「すべて見る」で全部） |
-| `#goods` | グッズ |
-| `#contents` | クレアクラン放送局（YouTube）・開発のウラ側（代表カミエナの発信）・BOOTH・公式X |
+| `#contents` | コンテンツ：公式X・クレアクラン放送局（YouTube）・クレアクランカフェ（番組）・開発のウラ側（代表カミエナ）・グッズ展開・BOOTH |
+| `#goods` | グッズの一覧（コンテンツの中） |
 | `#guideline` | ゲーム実況・動画配信ガイドライン（全文） |
 
-ヘッダーのメニュー（WORKS / ABOUT / NEWS / MEDIA / GOODS / CONTENTS / 配信ガイドライン）を押すと、その場所までスクロールします。
+ヘッダーのメニュー（WORKS / ABOUT / NEWS / MEDIA / CONTENTS / 配信ガイドライン）を押すと、その場所までスクロールします。
 
 - `news.html` `works.html` `about.html` `creators.html` `creator-kamiena.html` `goods.html` `guideline.html` は、以前のページのURLから来た人を、トップページの該当する場所へ転送するためだけのページです（`news.html?id=記事のid` → `#news-記事のid`）。
 - `404.html` … ページが見つからないとき
@@ -96,7 +96,7 @@
 | メディア掲載・実況動画を足す | `assets/data/media.js`（WEB記事は `articles`、テレビは `tv`、実況動画は `videos` に YouTube の動画ID） |
 | 「これまでのあゆみ」を足す | `index.html` の `HISTORY`（`<section … id="history">`）のところ |
 | 紹介文・看板娘・代表の紹介を変える | `index.html` の `ABOUT`（`<section … id="about">`）のところ |
-| YouTube・SNS・ショップの案内を変える | `index.html` の `CONTENTS`（`<section … id="contents">`）のところ |
+| コンテンツ（SNS・番組・グッズ・ショップ）の案内を変える | `index.html` の `CONTENTS`（`<section … id="contents">`）のところ |
 | 配信ガイドラインを変える | `index.html` の `GUIDELINE`（`<section … id="guideline">`）のところ |
 
 データを書き換えたら、毎回 `node tools/check-data.mjs` で確認してください。
@@ -140,7 +140,7 @@ Claude の作業ブランチ（`claude/…`）に入れただけでは公開さ�
 
 ## 更新するときの注意
 
-- CSS や JS（`assets/css/style.css`・`assets/js/*.js`）を変えたら、全 HTML の `?v=20261110b` の数字を新しくしてください（見に来た人のブラウザに古いファイルが残らないように）。データファイル（`assets/data/*.js`）は不要です。
+- CSS や JS（`assets/css/style.css`・`assets/js/*.js`）を変えたら、全 HTML の `?v=20261110c` の数字を新しくしてください（見に来た人のブラウザに古いファイルが残らないように）。データファイル（`assets/data/*.js`）は不要です。
 - ヘッダー・フッターは `index.html` と `404.html` に同じものが入っています（404 では `./#news` のように、トップページの場所を指しています）。メニューを変えるときは両方を書き換えてください。
 - JavaScript がオフのときは、ニュースや作品の一覧のかわりに案内文が表示されます。
 
