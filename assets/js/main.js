@@ -295,17 +295,6 @@
   }
   function renderMedia(el) {
     var kind = el.getAttribute('data-media');
-    if (kind === 'stats') {
-      var stats = [
-        ['テレビ出演', (MEDIA.tv || []).length, '本', 'c-pink', 'video'],
-        ['WEB記事', (MEDIA.articles || []).length, '本', 'c-sky', 'news'],
-        ['実況・プレイ動画', (MEDIA.videos || []).length, '本以上', 'c-mint', 'play']
-      ];
-      el.innerHTML = stats.map(function (s) {
-        return '<li class="media-stat ' + s[3] + '"><span class="media-stat__icon">' + icon(s[4]) + '</span><b>' + s[1] + '<small>' + s[2] + '</small></b><span>' + s[0] + '</span></li>';
-      }).join('');
-      return;
-    }
     if (kind === 'tv') {
       el.innerHTML = (MEDIA.tv || []).map(function (t, i) {
         return '<li class="reveal" style="--delay:' + (i * 0.06) + 's"><a class="card tv-card c-pink" ' + linkAttrs(t.url) + '>' +
@@ -321,7 +310,7 @@
         return '<li' + (i >= FIRST_A ? ' class="is-extra" hidden' : '') + '><a class="press-item" ' + linkAttrs(a.url) + '>' +
           '<time class="date">' + (a.date ? fmtDate(a.date) : '―') + '</time>' +
           '<span class="press-item__main"><span class="press-item__media">' + esc(a.media) + '</span><span class="press-item__title">' + esc(a.title) + '</span></span>' +
-          '<span class="press-item__tag">' + workTag(a.work) + '</span>' + icon('ext', 'press-item__ext') + '</a></li>';
+          '<span class="press-item__tag">' + (a.type ? '<span class="kind-tag">' + esc(a.type) + '</span>' : '') + workTag(a.work) + '</span>' + icon('ext', 'press-item__ext') + '</a></li>';
       }).join('');
       moreList(el, arts.length, FIRST_A, 'もっと見る');
       return;

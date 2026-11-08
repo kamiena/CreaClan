@@ -7,6 +7,7 @@
      videos   … 実況・プレイ動画（YouTube の動画ID。はじめは 8 件だけ表示）
                  KamiEna_Game の YouTube の再生リスト「【実況まとめ】…」から作っています
    ▼ work … 作品の id（works.js）。"garden-hunt" / "crea-run" / "traps"
+   ▼ type … 記事の種類。"ゲーム紹介" / "レビュー" / "イベントレポ" / "イベント紹介" / "展示"
    ========================================================================== */
 
 window.CC_MEDIA = {
@@ -16,33 +17,28 @@ window.CC_MEDIA = {
       text: "代表カミエナがインディーゲームクリエイターとして出演。スタジオでは近藤春菜さんが『ガーデンハント』をプレイしてくださいました！",
       image: "assets/img/pickup/kaiwai-hall.webp", url: "https://www.youtube.com/watch?v=DnmBOhPELe0&t=199s", work: "garden-hunt",
     },
-    {
-      date: "2026-07-07", channel: "BSフジ", title: "界隈ほーる 〜偏愛の穴に落ちてみた〜 #10「インディーゲーム界隈」第2弾",
-      text: "BitSummit を取材したインディーゲーム特集の第2弾に、代表カミエナが出演しました。",
-      image: "https://i.ytimg.com/vi/aq1FHu8H-Mg/hqdefault.jpg", url: "https://www.youtube.com/watch?v=aq1FHu8H-Mg",
-    },
   ],
 
   articles: [
-  { date: "2026-08-18", media: "ゲーム前線 / Gaming Frontline", title: "【徹底解説】ガーデンハント レビュー「パックマンライクなゲーム」", url: "https://gamezensen.hatenablog.com/entry/Garden_Hunt_rreview", work: "garden-hunt" },
-  { date: "2026-06-26", media: "ars●bit", title: "常設展示「404ゲームセンター：ars●bitセレクション」が始動（第1弾で『ガーデンハント』を展示）", url: "https://www.arsobit.com/exhibitions-20260626/", work: "garden-hunt" },
-  { date: "2026-05-07", media: "Kaburanai Games", title: "【東京ゲームダンジョン12】イベントレポ", url: "https://gamersizayuke.com/tyokyogamedungeon12_report/", work: "garden-hunt" },
-  { date: "2026-02-13", media: "ゲームメーカーズ", title: "初開催の「SHIBUYA GAMES WEEK 2026」現地レポート", url: "https://gamemakers.jp/article/2026_02_13_131159/", work: "garden-hunt" },
-  { date: "2026-02-06", media: "4Gamer.net", title: "都市型ゲームフェス「SHIBUYA GAMES WEEK」で遊べるインディーゲームまとめ", url: "https://www.4gamer.net/games/991/G999110/20260206031/", work: "garden-hunt" },
-  { date: "2026-02-06", media: "Yahoo!ニュース", title: "渋谷の街をゲームがジャック！「SHIBUYA GAMES WEEK 2026」が本日開幕", url: "https://news.yahoo.co.jp/expert/articles/462e39e3aeae041c6d96e8cfef97c62e79add002", work: "garden-hunt" },
-  { date: "2026-01-20", media: "ムダウチゲームズ", title: "“あの角を曲がったら…？”のドキドキ感がやみつきになる！ヌメヌメ×おにごっこアクション", url: "https://mudauchi.info/428906", work: "garden-hunt" },
-  { date: "2026-01-17", media: "電撃オンライン", title: "ドットイート風ヌメヌメ×おにごっこアクション『ガーデンハント』が配信", url: "https://dengekionline.com/article/202601/63360", work: "garden-hunt" },
-  { date: "2026-01-16", media: "GameWith", title: "『ガーデンハント』1月16日から発売開始！スライムを集めるドットイート風のヌメヌメおにごっこゲーム", url: "https://gamewith.jp/gamedb/13858/articles/52181", work: "garden-hunt" },
-  { date: "2025-12-06", media: "AUTOMATON WEST", title: "Garden slug-girl action, masochistic platforming and summer vacation nostalgia: 5 outdoorsy Japanese indie games（英語記事）", url: "https://automaton-media.com/en/news/garden-slug-girl-action-masochistic-platforming-and-summer-vacation-nostalgia-5-outdoorsy-japanese-indie-games/", work: "garden-hunt" },
-  { date: "2025-11-10", media: "Raspberlyのブログ", title: "【イベントレポ】: 東京ゲームダンジョン10", url: "https://raspberly.hateblo.jp/entry/TokyoGameDungeon10", work: "garden-hunt" },
-  { date: "2025-07-02", media: "4Gamer.net", title: "ナメツムリの少女を操作して，スライムを捕獲していく鬼ごっこアクション「ガーデンハント」，Steamストアページ公開", url: "https://www.4gamer.net/games/925/G092584/20250702004/", work: "garden-hunt" },
-  { date: "2025-07-02", media: "Gamer", title: "ナメツムリの少女がスライムを追うヌメヌメおにごっこアクション「ガーデンハント」のSteamストアページが公開！", url: "https://www.gamer.ne.jp/news/202507020067/", work: "garden-hunt" },
-  { date: "2025-05-16", media: "Indie Freaks", title: "ヌメヌメっと滑りながら庭園迷路を駆け回るアクションゲーム『PRJ rain（仮）』ブースレポート【東京ゲームダンジョン8】", url: "https://www.indie-freaks.com/2025/05/tgd8-prj-rain", work: "garden-hunt" },
-  { date: "2025-05-09", media: "リアルサウンド テック", title: "「東京ゲームダンジョン8」会場レポート（『PRJ rain』）", url: "https://realsound.jp/tech/2025/05/post-2013950.html", work: "garden-hunt" },
-  { date: "2025-01-02", media: "Game*Spark", title: "「コミックマーケット105」インディーゲームブースレポート（『PRJ rain』）", url: "https://www.gamespark.jp/article/2025/01/02/148188.html", work: "garden-hunt" },
-  { date: "", media: "4Gamer.net", title: "PC版 走れ！クレアちゃん まとめページ", url: "https://www.4gamer.net/games/732/G073281/", work: "crea-run" },
-  { date: "", media: "トレジャーアプリ", title: "アクションゲーム【走れ！クレアちゃん】クラフトでステージを駆け抜けよう", url: "https://treasure-app.pw/apps/8589", work: "crea-run" },
-  { date: "", media: "インディゲーム部", title: "[インディーゲーム紹介] 走れ！クレアちゃん", url: "https://gameition.xsrv.jp/review-kurea/", work: "crea-run" },
+  { date: "2026-08-18", media: "ゲーム前線 / Gaming Frontline", title: "【徹底解説】ガーデンハント レビュー「パックマンライクなゲーム」", url: "https://gamezensen.hatenablog.com/entry/Garden_Hunt_rreview", type: "レビュー", work: "garden-hunt" },
+  { date: "2026-06-26", media: "ars●bit", title: "常設展示「404ゲームセンター：ars●bitセレクション」が始動（第1弾で『ガーデンハント』を展示）", url: "https://www.arsobit.com/exhibitions-20260626/", type: "展示", work: "garden-hunt" },
+  { date: "2026-05-07", media: "Kaburanai Games", title: "【東京ゲームダンジョン12】イベントレポ", url: "https://gamersizayuke.com/tyokyogamedungeon12_report/", type: "イベントレポ", work: "garden-hunt" },
+  { date: "2026-02-13", media: "ゲームメーカーズ", title: "初開催の「SHIBUYA GAMES WEEK 2026」現地レポート", url: "https://gamemakers.jp/article/2026_02_13_131159/", type: "イベントレポ", work: "garden-hunt" },
+  { date: "2026-02-06", media: "4Gamer.net", title: "都市型ゲームフェス「SHIBUYA GAMES WEEK」で遊べるインディーゲームまとめ", url: "https://www.4gamer.net/games/991/G999110/20260206031/", type: "イベント紹介", work: "garden-hunt" },
+  { date: "2026-02-06", media: "Yahoo!ニュース", title: "渋谷の街をゲームがジャック！「SHIBUYA GAMES WEEK 2026」が本日開幕", url: "https://news.yahoo.co.jp/expert/articles/462e39e3aeae041c6d96e8cfef97c62e79add002", type: "イベント紹介", work: "garden-hunt" },
+  { date: "2026-01-20", media: "ムダウチゲームズ", title: "“あの角を曲がったら…？”のドキドキ感がやみつきになる！ヌメヌメ×おにごっこアクション", url: "https://mudauchi.info/428906", type: "レビュー", work: "garden-hunt" },
+  { date: "2026-01-17", media: "電撃オンライン", title: "ドットイート風ヌメヌメ×おにごっこアクション『ガーデンハント』が配信", url: "https://dengekionline.com/article/202601/63360", type: "ゲーム紹介", work: "garden-hunt" },
+  { date: "2026-01-16", media: "GameWith", title: "『ガーデンハント』1月16日から発売開始！スライムを集めるドットイート風のヌメヌメおにごっこゲーム", url: "https://gamewith.jp/gamedb/13858/articles/52181", type: "ゲーム紹介", work: "garden-hunt" },
+  { date: "2025-12-06", media: "AUTOMATON WEST", title: "Garden slug-girl action, masochistic platforming and summer vacation nostalgia: 5 outdoorsy Japanese indie games（英語記事）", url: "https://automaton-media.com/en/news/garden-slug-girl-action-masochistic-platforming-and-summer-vacation-nostalgia-5-outdoorsy-japanese-indie-games/", type: "ゲーム紹介", work: "garden-hunt" },
+  { date: "2025-11-10", media: "Raspberlyのブログ", title: "【イベントレポ】: 東京ゲームダンジョン10", url: "https://raspberly.hateblo.jp/entry/TokyoGameDungeon10", type: "イベントレポ", work: "garden-hunt" },
+  { date: "2025-07-02", media: "4Gamer.net", title: "ナメツムリの少女を操作して，スライムを捕獲していく鬼ごっこアクション「ガーデンハント」，Steamストアページ公開", url: "https://www.4gamer.net/games/925/G092584/20250702004/", type: "ゲーム紹介", work: "garden-hunt" },
+  { date: "2025-07-02", media: "Gamer", title: "ナメツムリの少女がスライムを追うヌメヌメおにごっこアクション「ガーデンハント」のSteamストアページが公開！", url: "https://www.gamer.ne.jp/news/202507020067/", type: "ゲーム紹介", work: "garden-hunt" },
+  { date: "2025-05-16", media: "Indie Freaks", title: "ヌメヌメっと滑りながら庭園迷路を駆け回るアクションゲーム『PRJ rain（仮）』ブースレポート【東京ゲームダンジョン8】", url: "https://www.indie-freaks.com/2025/05/tgd8-prj-rain", type: "イベントレポ", work: "garden-hunt" },
+  { date: "2025-05-09", media: "リアルサウンド テック", title: "「東京ゲームダンジョン8」会場レポート（『PRJ rain』）", url: "https://realsound.jp/tech/2025/05/post-2013950.html", type: "イベントレポ", work: "garden-hunt" },
+  { date: "2025-01-02", media: "Game*Spark", title: "「コミックマーケット105」インディーゲームブースレポート（『PRJ rain』）", url: "https://www.gamespark.jp/article/2025/01/02/148188.html", type: "イベントレポ", work: "garden-hunt" },
+  { date: "", media: "4Gamer.net", title: "PC版 走れ！クレアちゃん まとめページ", url: "https://www.4gamer.net/games/732/G073281/", type: "ゲーム紹介", work: "crea-run" },
+  { date: "", media: "トレジャーアプリ", title: "アクションゲーム【走れ！クレアちゃん】クラフトでステージを駆け抜けよう", url: "https://treasure-app.pw/apps/8589", type: "レビュー", work: "crea-run" },
+  { date: "", media: "インディゲーム部", title: "[インディーゲーム紹介] 走れ！クレアちゃん", url: "https://gameition.xsrv.jp/review-kurea/", type: "レビュー", work: "crea-run" },
   ],
 
   videos: [
