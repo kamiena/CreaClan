@@ -177,7 +177,9 @@ tools/
   - `assets/img/logo/logo-h-120.webp`・`logo-h-240.webp`：いただいたロゴの積み木と、横書きの文字ロゴ（小さめ・薄いドロップシャドウ）を横に並べたもの（ヘッダー用）
   - `assets/img/works/new/kv.webp`・`assets/img/pickup/new.webp`：積み木の床＋はてなマークの積み木（開発中の新作用）
   - `assets/img/contents/x-crea.webp`・`kamiena.webp`：正方形のイラストをそのまま中央に置き、左右を同じ画像のぼかしで広げたもの（16:9 の枠に見切れずに収めるため）
-  - `assets/img/ogp.jpg`・`assets/img/news/2026-10-14-renewal.webp`：積み木の床＋ロゴ＋看板娘3人（SNS でシェアされたときの画像）
+  - `assets/img/ogp.jpg`：ぼかした積み木の床＋ロゴ（左）＋名刺デザインのクレア（右、背景透過の画像）。リンクを貼ったときのサムネ（1200×630）
+    - 差し替えたら `index.html` と `404.html` の `og:image` の `?v=` を新しい日付にする（X などに古い画像が残らないように）
+  - `assets/img/news/2026-10-14-renewal.webp`：積み木の床＋ロゴ＋看板娘3人
   - `assets/img/news/prj-rain.webp`：正方形の画像の左右を、同じ画像のぼかしで埋めたもの
 - `assets/img/logo/mark.svg`・`favicon.svg` は、ロゴの積み木を図形で描き直したもの（形・色はロゴと同じ）です。
 
